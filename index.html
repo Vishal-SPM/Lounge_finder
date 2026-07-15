@@ -50,517 +50,85 @@
       box-shadow: 0 8px 48px rgba(0,0,0,0.10);
     }
 
-    /* ═══ Header / Nav ═══ */
+    /* ═══ Header ═══ */
     header {
       padding: 0 32px;
       height: 64px;
       border-bottom: 1px solid var(--border);
       display: flex;
       align-items: center;
-      justify-content: space-between;
       background: var(--bg);
       position: sticky;
       top: 0;
       z-index: 200;
     }
+    .brand { display: flex; align-items: center; }
+    .brand-logo { color: var(--primary); display: block; line-height: 1; }
+    .brand-logo img { display: block; }
 
-    /* Brand */
-    .brand {
+    /* ═══ Stepper ═══ */
+    .stepper {
+      position: sticky;
+      top: 64px;
+      z-index: 190;
       display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 2px;
-      min-width: 90px;
-    }
-    .brand-logo {
-      color: var(--primary);
-      display: block;
-      line-height: 1;
-    }
-    .brand-logo svg { display: block; }
-    .brand-name {
-      font-size: 8.5px;
-      font-weight: 500;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      color: var(--primary);
-    }
-
-    /* Center: airport selector pill */
-    .nav-airport {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      cursor: pointer;
-      padding: 6px 14px;
-      border-radius: var(--r-sm);
-      transition: background 0.15s;
-      user-select: none;
-    }
-    .nav-airport:hover { background: var(--cream); }
-    .nav-airport-name {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 15px;
-      font-weight: 700;
-      color: var(--text);
-    }
-    .nav-airport-name svg { width: 14px; height: 14px; color: var(--text-2); transition: transform 0.2s; }
-    .nav-airport.open .nav-airport-name svg { transform: rotate(180deg); }
-    .nav-airport-meta {
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      color: var(--primary);
-      margin-top: 2px;
-    }
-
-    /* Right icon buttons */
-    .nav-actions { display: flex; gap: 10px; min-width: 90px; justify-content: flex-end; }
-    .nav-icon-btn {
-      width: 38px; height: 38px;
-      border-radius: 50%;
-      border: 1.5px solid var(--border);
-      background: transparent;
-      cursor: pointer;
-      display: flex; align-items: center; justify-content: center;
-      color: var(--text-2);
-      transition: border-color 0.15s, background 0.15s;
-    }
-    .nav-icon-btn:hover { border-color: var(--cream-bd); background: var(--cream); color: var(--primary); }
-    .nav-icon-btn svg { width: 17px; height: 17px; }
-
-    /* ═══ Selector Section ═══ */
-    .selector-section {
-      padding: 32px 40px 28px;
-      background: var(--bg-warm);
-      border-bottom: 1px solid var(--border);
-    }
-    .selector-header { margin-bottom: 20px; }
-    .selector-header h2 { font-size: 19px; font-weight: 700; }
-    .selector-header p  { font-size: 13px; color: var(--text-2); margin-top: 4px; line-height: 1.5; }
-
-    /* Search */
-    .search-wrap {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      background: var(--bg);
-      border: 1.5px solid var(--border);
-      border-radius: 50px;
-      padding: 0 20px;
-      height: 52px;
-      margin-bottom: 24px;
-      transition: border-color 0.15s;
-    }
-    .search-wrap:focus-within { border-color: var(--primary); }
-    .search-wrap svg { width: 18px; height: 18px; color: var(--muted); flex-shrink: 0; }
-    .search-wrap input {
-      flex: 1;
-      border: none;
-      outline: none;
-      font-size: 15px;
-      background: transparent;
-      color: var(--text);
-    }
-    .search-wrap input::placeholder { color: var(--muted); }
-
-    /* City Grid */
-    .city-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-      gap: 14px;
-    }
-    .city-card {
-      background: var(--bg);
-      border: 1.5px solid var(--border);
-      border-radius: var(--r-lg);
-      overflow: hidden;
-      cursor: pointer;
-      transition: border-color 0.15s, box-shadow 0.15s, transform 0.15s;
-      box-shadow: var(--shadow-sm);
-    }
-    .city-card:hover {
-      border-color: var(--cream-bd);
-      box-shadow: var(--shadow-md);
-      transform: translateY(-2px);
-    }
-    .city-card.selected {
-      border-color: var(--primary);
-      box-shadow: 0 0 0 3px rgba(155,120,53,0.15);
-    }
-    .city-card-img-wrap {
-      position: relative;
-      height: 130px;
-      overflow: hidden;
-      background: #ddd;
-    }
-    .city-card-img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-      transition: transform 0.4s, opacity 0.3s;
-      opacity: 0;
-    }
-    .city-card-img.loaded { opacity: 1; }
-    .city-card:hover .city-card-img { transform: scale(1.05); }
-    .city-card-img-shimmer {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(90deg, #e2ddd6 25%, #eee9e1 50%, #e2ddd6 75%);
-      background-size: 200% 100%;
-      animation: shimmer 1.4s infinite;
-      transition: opacity 0.3s;
-    }
-    .city-card-img-shimmer.gone { opacity: 0; pointer-events: none; }
-    .city-card-check {
-      position: absolute;
-      top: 8px; right: 8px;
-      width: 26px; height: 26px;
-      background: var(--primary);
-      border-radius: 50%;
-      display: none;
       align-items: center;
       justify-content: center;
-    }
-    .city-card.selected .city-card-check { display: flex; }
-    .city-card-check svg { width: 14px; height: 14px; color: #fff; }
-    .city-card-label {
-      padding: 10px 12px;
-      font-size: 14px;
-      font-weight: 600;
-      color: var(--text);
-      text-align: center;
-    }
-    .city-card.selected .city-card-label {
-      background: var(--cream);
-      color: var(--primary);
-    }
-    .city-card-count {
-      font-size: 11px;
-      font-weight: 500;
-      color: var(--muted);
-      display: block;
-      margin-top: 1px;
-    }
-    .city-card.selected .city-card-count { color: var(--primary); opacity: 0.8; }
-    .city-no-results {
-      grid-column: 1 / -1;
-      text-align: center;
-      padding: 40px;
-      color: var(--muted);
-      font-size: 14px;
-    }
-
-    @keyframes shimmer {
-      0%   { background-position: 200% 0; }
-      100% { background-position: -200% 0; }
-    }
-
-    /* ═══ Filter Strip ═══ */
-    .filter-strip {
-      padding: 24px 40px;
+      gap: 10px;
+      padding: 16px 40px;
+      background: var(--bg);
       border-bottom: 1px solid var(--border);
-      display: none;
     }
-    .filter-strip.visible { display: block; }
-
-    .selected-airport-pill {
+    .step-item {
       display: flex;
       align-items: center;
-      gap: 12px;
-      background: var(--cream);
-      border: 1.5px solid var(--cream-bd);
-      border-radius: var(--r-md);
-      padding: 12px 16px;
-      margin-bottom: 20px;
-    }
-    .sap-icon {
-      width: 36px; height: 36px;
-      background: var(--primary-lt);
-      border-radius: 10px;
-      display: flex; align-items: center; justify-content: center;
-      flex-shrink: 0;
-    }
-    .sap-icon svg { width: 18px; height: 18px; color: var(--primary); }
-    .sap-name { font-size: 15px; font-weight: 700; color: var(--text); }
-    .sap-meta { font-size: 11px; font-weight: 600; color: var(--primary); letter-spacing: 0.5px; text-transform: uppercase; margin-top: 2px; }
-    .sap-clear {
-      margin-left: auto;
-      width: 28px; height: 28px;
-      background: rgba(155,120,53,0.1);
-      border: none;
-      border-radius: 50%;
-      cursor: pointer;
-      display: flex; align-items: center; justify-content: center;
-      color: var(--primary);
-      font-size: 14px;
+      gap: 8px;
+      padding: 4px 6px;
+      border-radius: var(--r-sm);
+      user-select: none;
       transition: background 0.15s;
     }
-    .sap-clear:hover { background: rgba(155,120,53,0.2); }
-
-    .filter-groups {
-      display: flex;
-      gap: 28px;
-      flex-wrap: wrap;
-    }
-    .filter-group { flex: 1; min-width: 180px; }
-    .filter-group-label {
-      font-size: 12px;
-      font-weight: 700;
-      color: var(--text-2);
-      text-transform: uppercase;
-      letter-spacing: 0.6px;
-      margin-bottom: 10px;
-    }
-    .radio-pills { display: flex; flex-direction: column; gap: 8px; }
-    .radio-pill {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 12px 14px;
-      border: 1.5px solid var(--border);
-      border-radius: var(--r-sm);
-      cursor: pointer;
-      transition: border-color 0.15s, background 0.15s;
-      font-size: 14px;
-      font-weight: 500;
-      color: var(--text-2);
-      background: var(--bg);
-    }
-    .radio-pill:hover { border-color: var(--cream-bd); background: var(--cream); color: var(--text); }
-    .radio-pill.active { border-color: var(--primary); background: var(--cream); color: var(--text); }
-    .radio-circle {
-      width: 20px; height: 20px;
+    .step-dot {
+      width: 26px; height: 26px;
+      border-radius: 50%;
       border: 2px solid var(--border);
-      border-radius: 50%;
-      flex-shrink: 0;
       display: flex; align-items: center; justify-content: center;
-      transition: border-color 0.15s;
-    }
-    .radio-pill.active .radio-circle { border-color: var(--primary); }
-    .radio-dot {
-      width: 10px; height: 10px;
-      background: var(--primary);
-      border-radius: 50%;
-      display: none;
-    }
-    .radio-pill.active .radio-dot { display: block; }
-
-    /* horizontal layout for 2-option groups */
-    .radio-pills.horizontal { flex-direction: row; }
-    .radio-pills.horizontal .radio-pill { flex: 1; }
-
-    /* ═══ Results Section ═══ */
-    .results-section {
-      padding: 28px 40px 40px;
-    }
-    .results-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 20px;
-    }
-    .results-title {
-      font-size: 16px;
-      font-weight: 700;
-    }
-    .results-count {
-      font-size: 13px;
+      font-size: 12px; font-weight: 700;
       color: var(--muted);
+      background: var(--bg);
+      transition: background 0.2s, border-color 0.2s, color 0.2s;
+      flex-shrink: 0;
     }
-
-    /* City section dividers */
-    .city-section-head {
-      grid-column: 1 / -1;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin-top: 4px;
-      margin-bottom: 2px;
-    }
-    .city-section-head span {
-      font-size: 11px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      color: var(--primary);
+    .step-dot svg { width: 12px; height: 12px; }
+    .step-label {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--muted);
+      transition: color 0.2s;
       white-space: nowrap;
     }
-    .city-section-head::after {
-      content: '';
-      flex: 1;
-      height: 1px;
-      background: var(--border);
+    .step-item.active .step-dot { background: var(--primary); border-color: var(--primary); color: #fff; }
+    .step-item.active .step-label { color: var(--text); font-weight: 700; }
+    .step-item.done .step-dot { background: var(--cream); border-color: var(--primary); color: var(--primary); }
+    .step-item.done .step-label { color: var(--text-2); }
+    .step-item.done { cursor: pointer; }
+    .step-item.done:hover .step-dot { background: var(--primary); color: #fff; }
+    .step-item.done:hover .step-label { color: var(--text); }
+    .step-item.upcoming { cursor: default; }
+    .step-line { width: 40px; height: 2px; background: var(--border); transition: background 0.3s; flex-shrink: 0; }
+    .step-line.done { background: var(--primary); }
+
+    /* ═══ Wizard body / step panels ═══ */
+    .wizard-body { padding: 40px; min-height: 480px; }
+    .step-panel { display: none; }
+    .step-panel.active { display: block; animation: stepIn 0.35s ease; }
+    @keyframes stepIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to   { opacity: 1; transform: translateY(0); }
     }
 
-    /* ═══ Lounge Grid ═══ */
-    .lounge-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-      gap: 20px;
-    }
-
-    /* ═══ Lounge Card ═══ */
-    .lcard {
-      background: var(--bg);
-      border: 1.5px solid var(--border);
-      border-radius: var(--r-lg);
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      box-shadow: var(--shadow-sm);
-      transition: box-shadow 0.2s, transform 0.2s;
-    }
-    .lcard:hover {
-      box-shadow: var(--shadow-lg);
-      transform: translateY(-3px);
-    }
-
-    /* image */
-    .lcard-img-wrap {
-      position: relative;
-      height: 185px;
-      overflow: hidden;
-      background: #ddd;
-    }
-    .lcard-img {
-      width: 100%; height: 100%;
-      object-fit: cover;
-      display: block;
-      transition: transform 0.4s, opacity 0.3s;
-      opacity: 0;
-    }
-    .lcard-img.loaded { opacity: 1; }
-    .lcard:hover .lcard-img { transform: scale(1.04); }
-    .lcard-img-shimmer {
-      position: absolute; inset: 0;
-      background: linear-gradient(90deg, #ddd8d0 25%, #eae5dd 50%, #ddd8d0 75%);
-      background-size: 200% 100%;
-      animation: shimmer 1.4s infinite;
-      transition: opacity 0.3s;
-    }
-    .lcard-img-shimmer.gone { opacity: 0; pointer-events: none; }
-    /* type badge on image */
-    .lcard-badge {
-      position: absolute;
-      top: 12px; left: 12px;
-      background: rgba(0,0,0,0.52);
-      backdrop-filter: blur(6px);
-      color: #fff;
-      font-size: 10px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.6px;
-      padding: 3px 9px;
-      border-radius: 6px;
-    }
-
-    /* body */
-    .lcard-body {
-      padding: 16px 18px 14px;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      flex: 1;
-    }
-    .lcard-name {
-      font-size: 17px;
-      font-weight: 800;
-      color: var(--text);
-      line-height: 1.25;
-    }
-    .lcard-loc {
-      font-size: 12px;
-      color: var(--text-2);
-      margin-top: 3px;
-      line-height: 1.4;
-    }
-
-    /* amenities */
-    .lcard-amenities {
-      display: flex;
-      gap: 14px;
-      flex-wrap: wrap;
-    }
-    .amenity {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 4px;
-      min-width: 48px;
-    }
-    .amenity-icon {
-      width: 32px; height: 32px;
-      color: var(--primary);
-    }
-    .amenity-icon svg { width: 100%; height: 100%; }
-    .amenity-label {
-      font-size: 10px;
-      font-weight: 600;
-      color: var(--text-2);
-      text-align: center;
-      line-height: 1.2;
-    }
-
-    /* info rows */
-    .lcard-info { display: flex; flex-direction: column; gap: 7px; }
-    .lcard-info-row {
-      background: var(--cream);
-      border-radius: var(--r-sm);
-      padding: 9px 12px;
-      font-size: 12px;
-      color: var(--text-2);
-      font-weight: 500;
-      text-align: center;
-    }
-
-    /* CTA */
-    .lcard-cta {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      background: var(--primary);
-      color: #fff;
-      padding: 12px 18px;
-      border-radius: var(--r-sm);
-      font-size: 13px;
-      font-weight: 700;
-      text-decoration: none;
-      transition: background 0.15s;
-      margin-top: auto;
-    }
-    .lcard-cta:hover { background: var(--primary-dk); }
-    .lcard-cta svg { width: 14px; height: 14px; }
-
-    /* ═══ Empty State ═══ */
-    .empty-state {
-      grid-column: 1 / -1;
-      text-align: center;
-      padding: 80px 32px;
-      color: var(--muted);
-    }
-    .empty-state svg { width: 48px; height: 48px; margin-bottom: 12px; opacity: 0.35; }
-    .empty-state h3 { font-size: 16px; font-weight: 600; margin-bottom: 6px; color: var(--text-2); }
-    .empty-state p  { font-size: 13px; }
-
-    /* ═══ Card Gate ═══ */
-    .card-gate {
-      padding: 64px 24px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: var(--bg-warm);
-    }
-    .card-gate-box {
-      width: 100%;
-      max-width: 400px;
-      text-align: center;
-    }
+    /* ═══ Step 1: Card ═══ */
+    .card-gate-box { max-width: 400px; margin: 24px auto; text-align: center; }
     .card-gate-icon {
       width: 56px; height: 56px;
       margin: 0 auto 20px;
@@ -568,8 +136,10 @@
       border-radius: 50%;
       display: flex; align-items: center; justify-content: center;
       color: var(--primary);
+      transition: background 0.2s, color 0.2s;
     }
     .card-gate-icon svg { width: 26px; height: 26px; }
+    .card-gate-icon.confirmed { background: var(--cream); color: var(--primary-dk); }
     .card-gate-box h2 { font-size: 20px; font-weight: 700; margin-bottom: 8px; }
     .card-gate-box p { font-size: 13px; color: var(--text-2); line-height: 1.5; margin-bottom: 28px; }
     .card-input-wrap {
@@ -596,13 +166,7 @@
       font-family: inherit;
     }
     .card-input-wrap input::placeholder { color: var(--muted); letter-spacing: 4px; }
-    .card-gate-error {
-      min-height: 18px;
-      font-size: 12px;
-      font-weight: 500;
-      color: #B3453F;
-      margin-top: 10px;
-    }
+    .card-gate-error { min-height: 18px; font-size: 12px; font-weight: 500; color: #B3453F; margin-top: 10px; }
     .card-gate-btn {
       width: 100%;
       margin-top: 20px;
@@ -620,52 +184,225 @@
     .card-gate-btn:hover:not(:disabled) { background: var(--primary-dk); }
     .card-gate-btn:disabled { opacity: 0.4; cursor: not-allowed; }
 
-    /* ═══ Card Pill (selector section, once verified) ═══ */
-    .card-pill {
+    .card-confirm-block { animation: stepIn 0.3s ease; }
+    .tier-chip {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 3px;
+      padding: 14px 32px;
+      border-radius: var(--r-md);
+      margin-bottom: 18px;
+    }
+    .tier-chip-eyebrow { font-size: 10px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; }
+    .tier-chip-name { font-size: 18px; font-weight: 800; }
+    .tier-chip.tier-select { background: var(--cream); border: 1.5px solid var(--cream-bd); }
+    .tier-chip.tier-select .tier-chip-eyebrow { color: var(--primary-dk); }
+    .tier-chip.tier-select .tier-chip-name { color: var(--text); }
+    .tier-chip.tier-private {
+      background: linear-gradient(135deg, #2A2118, #17130F);
+      border: 1.5px solid #8A6A35;
+      box-shadow: 0 6px 24px rgba(0,0,0,0.20);
+    }
+    .tier-chip.tier-private .tier-chip-eyebrow { color: #C9A15E; }
+    .tier-chip.tier-private .tier-chip-name { color: #F5E6C4; }
+    .card-perk { font-size: 13px; color: var(--text-2); line-height: 1.55; margin-bottom: 24px; padding: 0 8px; }
+    .card-edit-link {
+      display: block;
+      margin: 14px auto 0;
+      background: none;
+      border: none;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--muted);
+      text-decoration: underline;
+      cursor: pointer;
+      font-family: inherit;
+    }
+    .card-edit-link:hover { color: var(--text-2); }
+
+    /* ═══ Step 2: Airport ═══ */
+    .airport-step-head { margin-bottom: 20px; }
+    .airport-step-head h2 { font-size: 19px; font-weight: 700; }
+    .airport-step-head p { font-size: 13px; color: var(--text-2); margin-top: 4px; line-height: 1.5; }
+    .airport-step-head strong { color: var(--primary-dk); font-weight: 700; }
+
+    .search-wrap {
       display: flex;
       align-items: center;
       gap: 12px;
+      background: var(--bg);
+      border: 1.5px solid var(--border);
+      border-radius: 50px;
+      padding: 0 20px;
+      height: 52px;
+      margin-bottom: 24px;
+      transition: border-color 0.15s;
+    }
+    .search-wrap:focus-within { border-color: var(--primary); }
+    .search-wrap svg { width: 18px; height: 18px; color: var(--muted); flex-shrink: 0; }
+    .search-wrap input { flex: 1; border: none; outline: none; font-size: 15px; background: transparent; color: var(--text); font-family: inherit; }
+    .search-wrap input::placeholder { color: var(--muted); }
+
+    .city-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 14px; }
+    .city-card {
+      background: var(--bg);
+      border: 1.5px solid var(--border);
+      border-radius: var(--r-lg);
+      overflow: hidden;
+      cursor: pointer;
+      transition: border-color 0.15s, box-shadow 0.15s, transform 0.15s;
+      box-shadow: var(--shadow-sm);
+    }
+    .city-card:hover { border-color: var(--cream-bd); box-shadow: var(--shadow-md); transform: translateY(-2px); }
+    .city-card.selected { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(155,120,53,0.15); }
+    .city-card-img-wrap { position: relative; height: 130px; overflow: hidden; background: #ddd; }
+    .city-card-img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.4s, opacity 0.3s; opacity: 0; }
+    .city-card-img.loaded { opacity: 1; }
+    .city-card:hover .city-card-img { transform: scale(1.05); }
+    .city-card-img-shimmer {
+      position: absolute; inset: 0;
+      background: linear-gradient(90deg, #e2ddd6 25%, #eee9e1 50%, #e2ddd6 75%);
+      background-size: 200% 100%;
+      animation: shimmer 1.4s infinite;
+      transition: opacity 0.3s;
+    }
+    .city-card-img-shimmer.gone { opacity: 0; pointer-events: none; }
+    .city-card-check {
+      position: absolute; top: 8px; right: 8px;
+      width: 26px; height: 26px;
+      background: var(--primary);
+      border-radius: 50%;
+      display: none;
+      align-items: center; justify-content: center;
+    }
+    .city-card.selected .city-card-check { display: flex; }
+    .city-card-check svg { width: 14px; height: 14px; color: #fff; }
+    .city-card-label { padding: 10px 12px; font-size: 14px; font-weight: 600; color: var(--text); text-align: center; }
+    .city-card.selected .city-card-label { background: var(--cream); color: var(--primary); }
+    .city-card-count { font-size: 11px; font-weight: 500; color: var(--muted); display: block; margin-top: 1px; }
+    .city-card.selected .city-card-count { color: var(--primary); opacity: 0.8; }
+    .city-no-results { grid-column: 1 / -1; text-align: center; padding: 40px; color: var(--muted); font-size: 14px; }
+
+    @keyframes shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+
+    /* ═══ Step 3: Lounge results ═══ */
+    .lounge-step-head { margin-bottom: 20px; }
+    .back-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
       background: var(--cream);
       border: 1.5px solid var(--cream-bd);
       border-radius: var(--r-md);
-      padding: 12px 16px;
-      margin-bottom: 20px;
-    }
-    .card-pill-icon {
-      width: 36px; height: 36px;
-      background: var(--primary-lt);
-      border-radius: 10px;
-      display: flex; align-items: center; justify-content: center;
-      flex-shrink: 0;
-      color: var(--primary);
-    }
-    .card-pill-icon svg { width: 18px; height: 18px; }
-    .card-pill-name { font-size: 15px; font-weight: 700; color: var(--text); }
-    .card-pill-meta { font-size: 11px; font-weight: 600; color: var(--primary); letter-spacing: 0.5px; text-transform: uppercase; margin-top: 2px; }
-    .card-pill-change {
-      margin-left: auto;
-      background: transparent;
-      border: none;
+      padding: 10px 16px;
       cursor: pointer;
-      font-size: 12px;
-      font-weight: 700;
-      color: var(--primary);
-      text-decoration: underline;
       font-family: inherit;
+      transition: border-color 0.15s, background 0.15s;
     }
+    .back-pill:hover { background: var(--cream-bd); }
+    .back-pill svg { width: 16px; height: 16px; color: var(--primary); flex-shrink: 0; }
+    .back-pill-name { font-size: 14px; font-weight: 700; color: var(--text); }
+    .back-pill-change { font-size: 11px; font-weight: 700; color: var(--primary); text-transform: uppercase; letter-spacing: 0.5px; margin-left: 2px; }
 
-    .hidden-until-card { display: none !important; }
+    .filter-groups { display: flex; gap: 28px; flex-wrap: wrap; margin-bottom: 24px; }
+    .filter-group { flex: 1; min-width: 180px; }
+    .filter-group-label { font-size: 12px; font-weight: 700; color: var(--text-2); text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 10px; }
+    .radio-pills { display: flex; flex-wrap: wrap; gap: 8px; }
+    .radio-pill {
+      display: flex; align-items: center; justify-content: space-between; gap: 10px;
+      padding: 12px 14px;
+      border: 1.5px solid var(--border);
+      border-radius: var(--r-sm);
+      cursor: pointer;
+      transition: border-color 0.15s, background 0.15s;
+      font-size: 14px; font-weight: 500; color: var(--text-2);
+      background: var(--bg);
+    }
+    .radio-pill:hover { border-color: var(--cream-bd); background: var(--cream); color: var(--text); }
+    .radio-pill.active { border-color: var(--primary); background: var(--cream); color: var(--text); }
+    .radio-circle {
+      width: 20px; height: 20px; border: 2px solid var(--border); border-radius: 50%; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center; transition: border-color 0.15s;
+    }
+    .radio-pill.active .radio-circle { border-color: var(--primary); }
+    .radio-dot { width: 10px; height: 10px; background: var(--primary); border-radius: 50%; display: none; }
+    .radio-pill.active .radio-dot { display: block; }
+
+    .results-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; }
+    .results-title { font-size: 16px; font-weight: 700; }
+    .results-count { font-size: 13px; color: var(--muted); }
+
+    .lounge-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; }
+
+    .lcard {
+      background: var(--bg);
+      border: 1.5px solid var(--border);
+      border-radius: var(--r-lg);
+      overflow: hidden;
+      display: flex; flex-direction: column;
+      box-shadow: var(--shadow-sm);
+      transition: box-shadow 0.2s, transform 0.2s;
+    }
+    .lcard:hover { box-shadow: var(--shadow-lg); transform: translateY(-3px); }
+    .lcard-img-wrap { position: relative; height: 185px; overflow: hidden; background: #ddd; }
+    .lcard-img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.4s, opacity 0.3s; opacity: 0; }
+    .lcard-img.loaded { opacity: 1; }
+    .lcard:hover .lcard-img { transform: scale(1.04); }
+    .lcard-img-shimmer {
+      position: absolute; inset: 0;
+      background: linear-gradient(90deg, #ddd8d0 25%, #eae5dd 50%, #ddd8d0 75%);
+      background-size: 200% 100%;
+      animation: shimmer 1.4s infinite;
+      transition: opacity 0.3s;
+    }
+    .lcard-img-shimmer.gone { opacity: 0; pointer-events: none; }
+    .lcard-badge {
+      position: absolute; top: 12px; left: 12px;
+      background: rgba(0,0,0,0.52);
+      backdrop-filter: blur(6px);
+      color: #fff;
+      font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.6px;
+      padding: 3px 9px; border-radius: 6px;
+    }
+    .lcard-body { padding: 16px 18px 14px; display: flex; flex-direction: column; gap: 12px; flex: 1; }
+    .lcard-name { font-size: 17px; font-weight: 800; color: var(--text); line-height: 1.25; }
+    .lcard-loc { font-size: 12px; color: var(--text-2); margin-top: 3px; line-height: 1.4; }
+    .lcard-amenities { display: flex; gap: 14px; flex-wrap: wrap; }
+    .amenity { display: flex; flex-direction: column; align-items: center; gap: 4px; min-width: 48px; }
+    .amenity-icon { width: 32px; height: 32px; color: var(--primary); }
+    .amenity-icon svg { width: 100%; height: 100%; }
+    .amenity-label { font-size: 10px; font-weight: 600; color: var(--text-2); text-align: center; line-height: 1.2; }
+    .lcard-info { display: flex; flex-direction: column; gap: 7px; }
+    .lcard-info-row { background: var(--cream); border-radius: var(--r-sm); padding: 9px 12px; font-size: 12px; color: var(--text-2); font-weight: 500; text-align: center; }
+    .lcard-cta {
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      background: var(--primary); color: #fff;
+      padding: 12px 18px; border-radius: var(--r-sm);
+      font-size: 13px; font-weight: 700; text-decoration: none;
+      transition: background 0.15s; margin-top: auto;
+    }
+    .lcard-cta:hover { background: var(--primary-dk); }
+    .lcard-cta svg { width: 14px; height: 14px; }
+
+    .empty-state { grid-column: 1 / -1; text-align: center; padding: 80px 32px; color: var(--muted); }
+    .empty-state svg { width: 48px; height: 48px; margin-bottom: 12px; opacity: 0.35; }
+    .empty-state h3 { font-size: 16px; font-weight: 600; margin-bottom: 6px; color: var(--text-2); }
+    .empty-state p { font-size: 13px; }
 
     /* ═══ Responsive ═══ */
     @media (max-width: 900px) {
-      header, .selector-section, .filter-strip, .results-section { padding-left: 24px; padding-right: 24px; }
+      header, .wizard-body, .stepper { padding-left: 24px; padding-right: 24px; }
       .city-grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); }
     }
     @media (max-width: 600px) {
       body { padding: 10px 8px 32px; }
-      header, .selector-section, .filter-strip, .results-section { padding-left: 16px; padding-right: 16px; }
+      header, .wizard-body { padding-left: 16px; padding-right: 16px; }
+      .stepper { padding: 14px 16px; gap: 6px; }
+      .step-line { width: 20px; }
+      .step-label { display: none; }
+      .step-item.active .step-label { display: block; font-size: 11px; }
       .filter-groups { flex-direction: column; gap: 16px; }
-      .radio-pills.horizontal { flex-direction: column; }
       .lounge-grid { grid-template-columns: 1fr; }
     }
   </style>
@@ -673,110 +410,104 @@
 <body>
 <div class="page-wrap">
 
-  <!-- ═══ Header / Nav ═══ -->
+  <!-- ═══ Header ═══ -->
   <header>
-
-    <!-- Brand -->
     <div class="brand">
       <div class="brand-logo">
-        <img src="EA%20logo.png" alt="Elite Assist" height="36" style="display:block;" />
+        <img src="EA%20logo.png" alt="Elite Assist" height="36" />
       </div>
     </div>
-
-    <!-- Center: current airport -->
-    <div class="nav-airport hidden-until-card" id="navAirport" title="Change airport">
-      <div class="nav-airport-name">
-        <span id="navAirportName">Select Airport</span>
-        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"/>
-        </svg>
-      </div>
-      <div class="nav-airport-meta" id="navAirportMeta"></div>
-    </div>
-
-    <!-- Right: spacer for layout balance -->
-    <div class="nav-actions hidden-until-card" id="navActions"></div>
-
   </header>
 
-  <!-- ═══ Card Gate ═══ -->
-  <section class="card-gate" id="cardGate">
-    <div class="card-gate-box">
-      <div class="card-gate-icon">
-        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>
-      </div>
-      <h2>Find Your Lounge Access</h2>
-      <p>Enter the first 9 digits of your card number to check your lounge eligibility.</p>
-      <div class="card-input-wrap">
-        <input id="cardInput" type="text" inputmode="numeric" maxlength="9" placeholder="000000000" autocomplete="off" spellcheck="false" />
-      </div>
-      <div class="card-gate-error" id="cardGateError"></div>
-      <button class="card-gate-btn" id="cardGateBtn" disabled>Continue</button>
+  <!-- ═══ Stepper ═══ -->
+  <nav class="stepper" id="stepper">
+    <div class="step-item" data-step="1">
+      <span class="step-dot">1</span>
+      <span class="step-label">Card</span>
     </div>
-  </section>
-
-  <!-- ═══ Airport Selector ═══ -->
-  <div id="mainContent" class="hidden-until-card">
-  <section class="selector-section">
-    <div class="card-pill" id="cardPill">
-      <div class="card-pill-icon">
-        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>
-      </div>
-      <div>
-        <div class="card-pill-name" id="cardPillName"></div>
-        <div class="card-pill-meta">Card Verified</div>
-      </div>
-      <button class="card-pill-change" id="cardPillChange">Change</button>
+    <span class="step-line" id="stepLine1"></span>
+    <div class="step-item" data-step="2">
+      <span class="step-dot">2</span>
+      <span class="step-label">Airport</span>
     </div>
-
-    <div class="search-wrap">
-      <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-4.35-4.35M17 11A6 6 0 115 11a6 6 0 0112 0z"/>
-      </svg>
-      <input id="citySearch" type="text" placeholder="Where are you traveling to?" autocomplete="off" spellcheck="false" />
+    <span class="step-line" id="stepLine2"></span>
+    <div class="step-item" data-step="3">
+      <span class="step-dot">3</span>
+      <span class="step-label">Lounge</span>
     </div>
+  </nav>
 
-    <div class="city-grid" id="cityGrid"></div>
-  </section>
+  <div class="wizard-body">
 
-  <!-- ═══ Filter Strip ═══ -->
-  <div class="filter-strip" id="filterStrip">
+    <!-- ═══ Step 1: Card ═══ -->
+    <section class="step-panel active" id="panelCard">
+      <div class="card-gate-box">
+        <div class="card-gate-icon" id="cardGateIcon">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>
+        </div>
 
-    <div class="selected-airport-pill" id="selectedPill">
-      <div class="sap-icon">
+        <div id="cardFormBlock">
+          <h2>Find Your Lounge Access</h2>
+          <p>Enter the first 9 digits of your card number to check your lounge eligibility.</p>
+          <div class="card-input-wrap">
+            <input id="cardInput" type="text" inputmode="numeric" maxlength="9" placeholder="000000000" autocomplete="off" spellcheck="false" autofocus />
+          </div>
+          <div class="card-gate-error" id="cardGateError"></div>
+          <button class="card-gate-btn" id="cardGateBtn" disabled>Continue</button>
+        </div>
+
+        <div id="cardConfirmBlock" class="card-confirm-block" style="display:none;">
+          <div class="tier-chip" id="tierChip">
+            <span class="tier-chip-eyebrow" id="tierChipEyebrow"></span>
+            <span class="tier-chip-name" id="tierChipName"></span>
+          </div>
+          <p class="card-perk" id="cardPerk"></p>
+          <button class="card-gate-btn" id="cardContinueBtn">Continue to Airports</button>
+          <button class="card-edit-link" id="cardEditLink">Not your card? Re-enter</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ Step 2: Airport ═══ -->
+    <section class="step-panel" id="panelAirport">
+      <div class="airport-step-head">
+        <h2>Choose your airport</h2>
+        <p>Lounges available with your <strong id="airportStepCard">card</strong></p>
+      </div>
+      <div class="search-wrap">
         <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"
-            d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/>
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-4.35-4.35M17 11A6 6 0 115 11a6 6 0 0112 0z"/>
         </svg>
+        <input id="citySearch" type="text" placeholder="Where are you traveling to?" autocomplete="off" spellcheck="false" />
       </div>
-      <div>
-        <div class="sap-name" id="sapName"></div>
-        <div class="sap-meta" id="sapMeta"></div>
+      <div class="city-grid" id="cityGrid"></div>
+    </section>
+
+    <!-- ═══ Step 3: Lounge results ═══ -->
+    <section class="step-panel" id="panelLounge">
+      <div class="lounge-step-head">
+        <button class="back-pill" id="backToAirport" title="Change airport">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"/></svg>
+          <span class="back-pill-name" id="loungeAirportName"></span>
+          <span class="back-pill-change">Change</span>
+        </button>
       </div>
-      <button class="sap-clear" id="clearCity" title="Change airport">✕</button>
-    </div>
 
-    <div class="filter-groups">
-
-      <div class="filter-group" id="terminalGroup">
-        <div class="filter-group-label">Terminal</div>
-        <div class="radio-pills" id="terminalPills"></div>
+      <div class="filter-groups">
+        <div class="filter-group" id="terminalGroup">
+          <div class="filter-group-label">Terminal</div>
+          <div class="radio-pills" id="terminalPills"></div>
+        </div>
       </div>
 
+      <div class="results-header">
+        <span class="results-title" id="resultsTitle"></span>
+        <span class="results-count" id="resultsCount"></span>
+      </div>
+      <div class="lounge-grid" id="loungeGrid"></div>
+    </section>
 
-    </div>
   </div>
-
-  <!-- ═══ Results ═══ -->
-  <section class="results-section">
-    <div class="results-header">
-      <span class="results-title" id="resultsTitle">All Lounges</span>
-      <span class="results-count" id="resultsCount"></span>
-    </div>
-    <div class="lounge-grid" id="loungeGrid"></div>
-  </section>
-  </div><!-- /mainContent -->
-
 </div><!-- /page-wrap -->
 
 <script>
@@ -921,46 +652,97 @@ function h32(str) {
 }
 function getAmenities() { return AMENITIES; }
 
-/* ══════════════════════════════════════
-   STATE
-══════════════════════════════════════ */
-const cities = [...new Set(lounges.map(l => l.city))].sort();
-const cityCounts = Object.fromEntries(cities.map(c => [c, lounges.filter(l => l.city === c).length]));
-
-let selCity     = null;
-let selTerminal = 'all';
-let selCard     = null;
-
-/* total badge removed — count shown in results section */
+const CHECK_SVG = '<svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>';
+const CARD_ICON_SVG = '<svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>';
 
 /* ══════════════════════════════════════
-   CARD GATE
+   CARD BINS
 ══════════════════════════════════════ */
 const CARD_BINS = [
-  { prefix: '543213',  name: 'Select Credit Card'  },
-  { prefix: '5239223', name: 'Private Credit Card' },
+  { prefix: '543213',  name: 'Select Credit Card',  tier: 'select',  perk: 'Enjoy 2 complimentary domestic lounge visits every quarter.' },
+  { prefix: '5239223', name: 'Private Credit Card', tier: 'private', perk: 'Enjoy 4 complimentary visits per quarter, plus one guest, at domestic & international lounges.' },
 ];
-
-const GATED_IDS = ['navAirport', 'navActions', 'mainContent'];
 
 function matchCardBin(digits) {
   return CARD_BINS.find(b => digits.startsWith(b.prefix)) || null;
 }
 
-function showApp() {
-  GATED_IDS.forEach(id => document.getElementById(id).classList.remove('hidden-until-card'));
-  document.getElementById('cardGate').style.display = 'none';
-  document.getElementById('cardPillName').textContent = selCard.name;
+/* ══════════════════════════════════════
+   STATE
+══════════════════════════════════════ */
+function eligibleLounges() {
+  if (!selCard) return [];
+  return selCard.tier === 'private' ? lounges : lounges.filter(l => l.type === 'domestic');
 }
 
-function hideApp() {
-  GATED_IDS.forEach(id => document.getElementById(id).classList.add('hidden-until-card'));
-  document.getElementById('cardGate').style.display = '';
+function computeCityData() {
+  const el = eligibleLounges();
+  const cityList = [...new Set(el.map(l => l.city))].sort();
+  const counts = Object.fromEntries(cityList.map(c => [c, el.filter(l => l.city === c).length]));
+  return { cityList, counts };
 }
 
-const cardInput     = document.getElementById('cardInput');
-const cardGateBtn   = document.getElementById('cardGateBtn');
-const cardGateError = document.getElementById('cardGateError');
+let cities      = [];
+let cityCounts  = {};
+let selCard     = null;
+let selCity     = null;
+let selTerminal = 'all';
+let currentStep = 1;
+
+/* ══════════════════════════════════════
+   STEPPER / NAVIGATION
+══════════════════════════════════════ */
+function goToStep(n) {
+  currentStep = n;
+  ['panelCard','panelAirport','panelLounge'].forEach((id, i) => {
+    document.getElementById(id).classList.toggle('active', i === n - 1);
+  });
+  renderStepper();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  if (n === 1) setTimeout(() => cardInput.focus(), 300);
+}
+
+function renderStepper() {
+  const doneMap = { 1: !!selCard, 2: !!selCity, 3: false };
+  [1, 2, 3].forEach(n => {
+    const el = document.querySelector(`.step-item[data-step="${n}"]`);
+    const dot = el.querySelector('.step-dot');
+    el.classList.remove('active', 'done', 'upcoming');
+    if (n === currentStep) {
+      el.classList.add('active');
+      dot.innerHTML = n;
+    } else if (doneMap[n]) {
+      el.classList.add('done');
+      dot.innerHTML = CHECK_SVG;
+    } else {
+      el.classList.add('upcoming');
+      dot.innerHTML = n;
+    }
+  });
+  document.getElementById('stepLine1').classList.toggle('done', !!selCard);
+  document.getElementById('stepLine2').classList.toggle('done', !!selCity);
+}
+
+document.querySelectorAll('.step-item').forEach(el => {
+  el.addEventListener('click', () => {
+    if (!el.classList.contains('done')) return;
+    const n = Number(el.dataset.step);
+    if (n === 1) { resetCard(); return; }
+    if (n === 2) { goToStep(2); return; }
+  });
+});
+
+document.getElementById('backToAirport').addEventListener('click', () => goToStep(2));
+
+/* ══════════════════════════════════════
+   STEP 1 — CARD
+══════════════════════════════════════ */
+const cardInput        = document.getElementById('cardInput');
+const cardGateBtn      = document.getElementById('cardGateBtn');
+const cardGateError    = document.getElementById('cardGateError');
+const cardGateIcon     = document.getElementById('cardGateIcon');
+const cardFormBlock    = document.getElementById('cardFormBlock');
+const cardConfirmBlock = document.getElementById('cardConfirmBlock');
 
 cardInput.addEventListener('input', () => {
   cardInput.value = cardInput.value.replace(/\D/g, '').slice(0, 9);
@@ -979,24 +761,51 @@ cardGateBtn.addEventListener('click', () => {
     return;
   }
   selCard = match;
-  showApp();
+  showCardConfirmation(match);
 });
 
-document.getElementById('cardPillChange').addEventListener('click', () => {
+function showCardConfirmation(match) {
+  cardFormBlock.style.display = 'none';
+  cardConfirmBlock.style.display = 'block';
+  const chip = document.getElementById('tierChip');
+  chip.className = 'tier-chip tier-' + match.tier;
+  document.getElementById('tierChipEyebrow').textContent = match.tier === 'private' ? 'Private Tier' : 'Select Tier';
+  document.getElementById('tierChipName').textContent = match.name;
+  document.getElementById('cardPerk').textContent = match.perk;
+  document.getElementById('airportStepCard').textContent = match.name;
+  cardGateIcon.classList.add('confirmed');
+  cardGateIcon.innerHTML = CHECK_SVG;
+
+  const { cityList, counts } = computeCityData();
+  cities = cityList;
+  cityCounts = counts;
+  document.getElementById('citySearch').value = '';
+  renderCityGrid();
+  renderStepper();
+}
+
+function resetCard() {
   selCard = null;
   selCity = null;
   selTerminal = 'all';
+  cities = [];
+  cityCounts = {};
   cardInput.value = '';
+  document.getElementById('citySearch').value = '';
   cardGateBtn.disabled = true;
   cardGateError.textContent = '';
-  hideApp();
-  renderCityGrid();
-  applyFilters();
-  cardInput.focus();
-});
+  cardFormBlock.style.display = '';
+  cardConfirmBlock.style.display = 'none';
+  cardGateIcon.classList.remove('confirmed');
+  cardGateIcon.innerHTML = CARD_ICON_SVG;
+  goToStep(1);
+}
+
+document.getElementById('cardContinueBtn').addEventListener('click', () => goToStep(2));
+document.getElementById('cardEditLink').addEventListener('click', resetCard);
 
 /* ══════════════════════════════════════
-   CITY GRID
+   STEP 2 — AIRPORT / CITY GRID
 ══════════════════════════════════════ */
 function renderCityGrid(query = '') {
   const q = query.toLowerCase().trim();
@@ -1035,12 +844,13 @@ document.getElementById('cityGrid').addEventListener('click', e => {
   const card = e.target.closest('.city-card');
   if (!card) return;
   const city = card.dataset.city;
-  if (selCity === city) return;
   selCity = city;
   selTerminal = 'all';
   renderCityGrid(document.getElementById('citySearch').value);
+  renderLoungeStepHead();
   renderFilterStrip();
   applyFilters();
+  goToStep(3);
 });
 
 document.getElementById('citySearch').addEventListener('input', e => {
@@ -1048,22 +858,19 @@ document.getElementById('citySearch').addEventListener('input', e => {
 });
 
 /* ══════════════════════════════════════
-   FILTER STRIP
+   STEP 3 — LOUNGE RESULTS
 ══════════════════════════════════════ */
-function renderFilterStrip() {
-  const strip = document.getElementById('filterStrip');
-  if (!selCity) { strip.classList.remove('visible'); return; }
-  strip.classList.add('visible');
+function renderLoungeStepHead() {
+  if (!selCity) return;
+  const cityLounges = eligibleLounges().filter(l => l.city === selCity);
+  document.getElementById('loungeAirportName').textContent = cityLounges[0].airport;
+}
 
-  const cityLounges = lounges.filter(l => l.city === selCity);
-  const airport = cityLounges[0].airport;
+function renderFilterStrip() {
+  if (!selCity) return;
+  const cityLounges = eligibleLounges().filter(l => l.city === selCity);
   const terminals = [...new Set(cityLounges.map(l => l.terminal))].sort();
 
-  /* airport pill */
-  document.getElementById('sapName').textContent = airport;
-  document.getElementById('sapMeta').textContent = selTerminal !== 'all' ? selTerminal : 'All Terminals';
-
-  /* terminal pills */
   const tGroup = document.getElementById('terminalGroup');
   const tPills = document.getElementById('terminalPills');
   if (terminals.length > 1) {
@@ -1079,10 +886,8 @@ function renderFilterStrip() {
   } else {
     tGroup.style.display = 'none';
   }
-
 }
 
-/* Terminal pills (dynamic) */
 document.getElementById('terminalPills').addEventListener('click', e => {
   const pill = e.target.closest('.radio-pill');
   if (!pill) return;
@@ -1090,17 +895,7 @@ document.getElementById('terminalPills').addEventListener('click', e => {
   renderFilterStrip();
   applyFilters();
 });
-/* Clear city */
-document.getElementById('clearCity').addEventListener('click', () => {
-  selCity = null; selTerminal = 'all';
-  renderCityGrid(document.getElementById('citySearch').value);
-  renderFilterStrip();
-  applyFilters();
-});
 
-/* ══════════════════════════════════════
-   LOUNGE CARDS
-══════════════════════════════════════ */
 function renderLounge(l) {
   const key = l.city + l.name;
   const imgUrl = LOUNGE_IMGS[h32(key) % LOUNGE_IMGS.length];
@@ -1141,35 +936,11 @@ function renderLounge(l) {
   </div>`;
 }
 
-function syncNavHeader() {
-  const nameEl = document.getElementById('navAirportName');
-  const metaEl = document.getElementById('navAirportMeta');
-  if (!selCity) {
-    nameEl.textContent = 'Select City';
-    metaEl.textContent = '';
-    return;
-  }
-  const f = lounges.find(l => l.city === selCity);
-  nameEl.textContent = f.airport;
-  metaEl.textContent = selTerminal !== 'all' ? selTerminal : 'All Terminals';
-}
-
 function applyFilters() {
-  syncNavHeader();
   const grid = document.getElementById('loungeGrid');
+  if (!selCity) { grid.innerHTML = ''; return; }
 
-  if (!selCity) {
-    document.getElementById('resultsTitle').textContent = '';
-    document.getElementById('resultsCount').textContent = '';
-    grid.innerHTML = `<div class="empty-state">
-      <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/></svg>
-      <h3>Select a city to explore lounges</h3>
-      <p>Choose your departure city from the grid above.</p>
-    </div>`;
-    return;
-  }
-
-  let result = lounges.filter(l => l.city === selCity);
+  let result = eligibleLounges().filter(l => l.city === selCity);
   if (selTerminal !== 'all') result = result.filter(l => l.terminal === selTerminal);
 
   const n = result.length;
@@ -1188,17 +959,10 @@ function applyFilters() {
   grid.innerHTML = result.map(renderLounge).join('');
 }
 
-/* Clicking nav airport scrolls to selector & focuses search */
-document.getElementById('navAirport').addEventListener('click', () => {
-  document.querySelector('.selector-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
-  setTimeout(() => document.getElementById('citySearch').focus(), 380);
-});
-
 /* ══════════════════════════════════════
    INIT
 ══════════════════════════════════════ */
-renderCityGrid();
-applyFilters();
+renderStepper();
 </script>
 </body>
 </html>
