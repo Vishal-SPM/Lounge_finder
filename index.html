@@ -142,30 +142,51 @@
     .card-gate-icon.confirmed { background: var(--cream); color: var(--primary-dk); }
     .card-gate-box h2 { font-size: 20px; font-weight: 700; margin-bottom: 8px; }
     .card-gate-box p { font-size: 13px; color: var(--text-2); line-height: 1.5; margin-bottom: 28px; }
-    .card-input-wrap {
+    .card-select-group { text-align: left; margin-bottom: 16px; }
+    .card-select-label {
+      display: block;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--text-2);
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      margin-bottom: 8px;
+    }
+    .card-select-wrap {
+      position: relative;
       display: flex;
       align-items: center;
       background: var(--bg);
       border: 1.5px solid var(--border);
-      border-radius: 50px;
-      padding: 0 22px;
+      border-radius: var(--r-sm);
+      padding: 0 44px 0 18px;
       height: 52px;
       transition: border-color 0.15s;
     }
-    .card-input-wrap:focus-within { border-color: var(--primary); }
-    .card-input-wrap input {
+    .card-select-wrap:focus-within { border-color: var(--primary); }
+    .card-select-wrap select {
       flex: 1;
+      width: 100%;
       border: none;
       outline: none;
       background: transparent;
-      font-size: 17px;
+      font-size: 15px;
       font-weight: 500;
-      letter-spacing: 4px;
-      text-align: center;
       color: var(--text);
       font-family: inherit;
+      appearance: none;
+      -webkit-appearance: none;
+      cursor: pointer;
     }
-    .card-input-wrap input::placeholder { color: var(--muted); letter-spacing: 4px; }
+    .card-select-wrap select:disabled { color: var(--muted); cursor: not-allowed; }
+    .card-select-chevron {
+      position: absolute;
+      right: 18px;
+      width: 14px;
+      height: 14px;
+      color: var(--muted);
+      pointer-events: none;
+    }
     .card-gate-error { min-height: 18px; font-size: 12px; font-weight: 500; color: #B3453F; margin-top: 10px; }
     .card-gate-btn {
       width: 100%;
@@ -448,10 +469,30 @@
 
         <div id="cardFormBlock">
           <h2>Find Your Lounge Access</h2>
-          <p>Enter the first 9 digits of your card number to check your lounge eligibility.</p>
-          <div class="card-input-wrap">
-            <input id="cardInput" type="text" inputmode="numeric" maxlength="9" placeholder="000000000" autocomplete="off" spellcheck="false" autofocus />
+          <p>Select your card type and card name to check your lounge eligibility.</p>
+
+          <div class="card-select-group">
+            <label class="card-select-label" for="cardTypeSelect">Card Type</label>
+            <div class="card-select-wrap">
+              <select id="cardTypeSelect" autofocus>
+                <option value="" disabled selected>Select card type</option>
+                <option value="credit">Credit Card</option>
+                <option value="debit">Debit Card</option>
+              </select>
+              <svg class="card-select-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+            </div>
           </div>
+
+          <div class="card-select-group">
+            <label class="card-select-label" for="cardNameSelect">Card Name</label>
+            <div class="card-select-wrap">
+              <select id="cardNameSelect" disabled>
+                <option value="" disabled selected>Select card type first</option>
+              </select>
+              <svg class="card-select-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+            </div>
+          </div>
+
           <div class="card-gate-error" id="cardGateError"></div>
           <button class="card-gate-btn" id="cardGateBtn" disabled>Continue</button>
         </div>
@@ -656,15 +697,21 @@ const CHECK_SVG = '<svg fill="none" stroke="currentColor" viewBox="0 0 24 24" st
 const CARD_ICON_SVG = '<svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>';
 
 /* ══════════════════════════════════════
-   CARD BINS
+   CARD CATALOG
 ══════════════════════════════════════ */
-const CARD_BINS = [
-  { prefix: '543213',  name: 'Select Credit Card',  tier: 'select',  perk: 'Enjoy 2 complimentary domestic lounge visits every quarter.' },
-  { prefix: '5239223', name: 'Private Credit Card', tier: 'private', perk: 'Enjoy 4 complimentary visits per quarter, plus one guest, at domestic & international lounges.' },
-];
+const CARD_CATALOG = {
+  credit: [
+    { id: 'elite-select-credit',  name: 'Elite Select Credit Card',  tier: 'select',  perk: 'Enjoy 2 complimentary domestic lounge visits every quarter.' },
+    { id: 'elite-private-credit', name: 'Elite Private Credit Card', tier: 'private', perk: 'Enjoy 4 complimentary visits per quarter, plus one guest, at domestic & international lounges.' },
+  ],
+  debit: [
+    { id: 'elite-platinum-debit',  name: 'Elite Platinum Debit Card',  tier: 'select',  perk: 'Enjoy 1 complimentary domestic lounge visit every quarter.' },
+    { id: 'elite-signature-debit', name: 'Elite Signature Debit Card', tier: 'private', perk: 'Enjoy 2 complimentary visits per quarter at domestic & international lounges.' },
+  ],
+};
 
-function matchCardBin(digits) {
-  return CARD_BINS.find(b => digits.startsWith(b.prefix)) || null;
+function findCard(type, id) {
+  return (CARD_CATALOG[type] || []).find(c => c.id === id) || null;
 }
 
 /* ══════════════════════════════════════
@@ -699,7 +746,7 @@ function goToStep(n) {
   });
   renderStepper();
   window.scrollTo({ top: 0, behavior: 'smooth' });
-  if (n === 1) setTimeout(() => cardInput.focus(), 300);
+  if (n === 1) setTimeout(() => cardTypeSelect.focus(), 300);
 }
 
 function renderStepper() {
@@ -737,27 +784,37 @@ document.getElementById('backToAirport').addEventListener('click', () => goToSte
 /* ══════════════════════════════════════
    STEP 1 — CARD
 ══════════════════════════════════════ */
-const cardInput        = document.getElementById('cardInput');
+const cardTypeSelect   = document.getElementById('cardTypeSelect');
+const cardNameSelect   = document.getElementById('cardNameSelect');
 const cardGateBtn      = document.getElementById('cardGateBtn');
 const cardGateError    = document.getElementById('cardGateError');
 const cardGateIcon     = document.getElementById('cardGateIcon');
 const cardFormBlock    = document.getElementById('cardFormBlock');
 const cardConfirmBlock = document.getElementById('cardConfirmBlock');
 
-cardInput.addEventListener('input', () => {
-  cardInput.value = cardInput.value.replace(/\D/g, '').slice(0, 9);
+function updateCardGateBtn() {
+  cardGateBtn.disabled = !(cardTypeSelect.value && cardNameSelect.value);
+}
+
+cardTypeSelect.addEventListener('change', () => {
+  const type = cardTypeSelect.value;
+  const cards = CARD_CATALOG[type] || [];
+  cardNameSelect.innerHTML = '<option value="" disabled selected>Select card name</option>' +
+    cards.map(c => `<option value="${c.id}">${c.name}</option>`).join('');
+  cardNameSelect.disabled = !type;
   cardGateError.textContent = '';
-  cardGateBtn.disabled = cardInput.value.length !== 9;
+  updateCardGateBtn();
 });
 
-cardInput.addEventListener('keydown', e => {
-  if (e.key === 'Enter' && !cardGateBtn.disabled) cardGateBtn.click();
+cardNameSelect.addEventListener('change', () => {
+  cardGateError.textContent = '';
+  updateCardGateBtn();
 });
 
 cardGateBtn.addEventListener('click', () => {
-  const match = matchCardBin(cardInput.value);
+  const match = findCard(cardTypeSelect.value, cardNameSelect.value);
   if (!match) {
-    cardGateError.textContent = "We couldn't recognize this card number. Please check and try again.";
+    cardGateError.textContent = 'Please select your card type and card name.';
     return;
   }
   selCard = match;
@@ -790,7 +847,9 @@ function resetCard() {
   selTerminal = 'all';
   cities = [];
   cityCounts = {};
-  cardInput.value = '';
+  cardTypeSelect.value = '';
+  cardNameSelect.innerHTML = '<option value="" disabled selected>Select card type first</option>';
+  cardNameSelect.disabled = true;
   document.getElementById('citySearch').value = '';
   cardGateBtn.disabled = true;
   cardGateError.textContent = '';
