@@ -42,7 +42,7 @@
 
     /* ═══ Page Container ═══ */
     .page-wrap {
-      max-width: 1440px;
+      max-width: 1200px;
       margin: 0 auto;
       background: var(--bg);
       border-radius: var(--r-xl);
@@ -66,84 +66,18 @@
     .brand-logo { color: var(--primary); display: block; line-height: 1; }
     .brand-logo img { display: block; }
 
-    /* ═══ Stepper ═══ */
-    .stepper {
-      position: sticky;
-      top: 64px;
-      z-index: 190;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      padding: 16px 40px;
-      background: var(--bg);
-      border-bottom: 1px solid var(--border);
-    }
-    .step-item {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      padding: 4px 6px;
-      border-radius: var(--r-sm);
-      user-select: none;
-      transition: background 0.15s;
-    }
-    .step-dot {
-      width: 26px; height: 26px;
-      border-radius: 50%;
-      border: 2px solid var(--border);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 12px; font-weight: 700;
-      color: var(--muted);
-      background: var(--bg);
-      transition: background 0.2s, border-color 0.2s, color 0.2s;
-      flex-shrink: 0;
-    }
-    .step-dot svg { width: 12px; height: 12px; }
-    .step-label {
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--muted);
-      transition: color 0.2s;
-      white-space: nowrap;
-    }
-    .step-item.active .step-dot { background: var(--primary); border-color: var(--primary); color: #fff; }
-    .step-item.active .step-label { color: var(--text); font-weight: 700; }
-    .step-item.done .step-dot { background: var(--cream); border-color: var(--primary); color: var(--primary); }
-    .step-item.done .step-label { color: var(--text-2); }
-    .step-item.done { cursor: pointer; }
-    .step-item.done:hover .step-dot { background: var(--primary); color: #fff; }
-    .step-item.done:hover .step-label { color: var(--text); }
-    .step-item.upcoming { cursor: default; }
-    .step-line { width: 40px; height: 2px; background: var(--border); transition: background 0.3s; flex-shrink: 0; }
-    .step-line.done { background: var(--primary); }
+    /* ═══ Main body ═══ */
+    .main-body { padding: 32px 40px 40px; }
 
-    /* ═══ Wizard body / step panels ═══ */
-    .wizard-body { padding: 40px; min-height: 480px; }
-    .step-panel { display: none; }
-    .step-panel.active { display: block; animation: stepIn 0.35s ease; }
-    @keyframes stepIn {
-      from { opacity: 0; transform: translateY(8px); }
-      to   { opacity: 1; transform: translateY(0); }
+    /* ═══ Selector bar ═══ */
+    .selector-bar {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
     }
-
-    /* ═══ Step 1: Card ═══ */
-    .card-gate-box { max-width: 400px; margin: 24px auto; text-align: center; }
-    .card-gate-icon {
-      width: 56px; height: 56px;
-      margin: 0 auto 20px;
-      background: var(--primary-lt);
-      border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      color: var(--primary);
-      transition: background 0.2s, color 0.2s;
-    }
-    .card-gate-icon svg { width: 26px; height: 26px; }
-    .card-gate-icon.confirmed { background: var(--cream); color: var(--primary-dk); }
-    .card-gate-box h2 { font-size: 20px; font-weight: 700; margin-bottom: 8px; }
-    .card-gate-box p { font-size: 13px; color: var(--text-2); line-height: 1.5; margin-bottom: 28px; }
-    .card-select-group { text-align: left; margin-bottom: 16px; }
-    .card-select-label {
+    .selector-field { flex: 1; min-width: 220px; }
+    .selector-label {
       display: block;
       font-size: 12px;
       font-weight: 700;
@@ -152,7 +86,7 @@
       letter-spacing: 0.6px;
       margin-bottom: 8px;
     }
-    .card-select-wrap {
+    .select-wrap {
       position: relative;
       display: flex;
       align-items: center;
@@ -163,8 +97,8 @@
       height: 52px;
       transition: border-color 0.15s;
     }
-    .card-select-wrap:focus-within { border-color: var(--primary); }
-    .card-select-wrap select {
+    .select-wrap:focus-within { border-color: var(--primary); }
+    .select-wrap select {
       flex: 1;
       width: 100%;
       border: none;
@@ -178,8 +112,8 @@
       -webkit-appearance: none;
       cursor: pointer;
     }
-    .card-select-wrap select:disabled { color: var(--muted); cursor: not-allowed; }
-    .card-select-chevron {
+    .select-wrap select:disabled { color: var(--muted); cursor: not-allowed; }
+    .select-chevron {
       position: absolute;
       right: 18px;
       width: 14px;
@@ -187,152 +121,32 @@
       color: var(--muted);
       pointer-events: none;
     }
-    .card-gate-error { min-height: 18px; font-size: 12px; font-weight: 500; color: #B3453F; margin-top: 10px; }
-    .card-gate-btn {
-      width: 100%;
-      margin-top: 20px;
-      background: var(--primary);
-      color: #fff;
-      border: none;
-      padding: 14px 18px;
-      border-radius: var(--r-sm);
-      font-size: 13px;
-      font-weight: 700;
-      font-family: inherit;
-      cursor: pointer;
-      transition: background 0.15s, opacity 0.15s;
-    }
-    .card-gate-btn:hover:not(:disabled) { background: var(--primary-dk); }
-    .card-gate-btn:disabled { opacity: 0.4; cursor: not-allowed; }
 
-    .card-confirm-block { animation: stepIn 0.3s ease; }
-    .tier-chip {
-      display: inline-flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 3px;
-      padding: 14px 32px;
-      border-radius: var(--r-md);
-      margin-bottom: 18px;
-    }
-    .tier-chip-eyebrow { font-size: 10px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; }
-    .tier-chip-name { font-size: 18px; font-weight: 800; }
-    .tier-chip.tier-select { background: var(--cream); border: 1.5px solid var(--cream-bd); }
-    .tier-chip.tier-select .tier-chip-eyebrow { color: var(--primary-dk); }
-    .tier-chip.tier-select .tier-chip-name { color: var(--text); }
-    .tier-chip.tier-private {
-      background: linear-gradient(135deg, #2A2118, #17130F);
-      border: 1.5px solid #8A6A35;
-      box-shadow: 0 6px 24px rgba(0,0,0,0.20);
-    }
-    .tier-chip.tier-private .tier-chip-eyebrow { color: #C9A15E; }
-    .tier-chip.tier-private .tier-chip-name { color: #F5E6C4; }
-    .card-perk { font-size: 13px; color: var(--text-2); line-height: 1.55; margin-bottom: 24px; padding: 0 8px; }
-    .card-edit-link {
-      display: block;
-      margin: 14px auto 0;
-      background: none;
-      border: none;
-      font-size: 12px;
-      font-weight: 600;
-      color: var(--muted);
-      text-decoration: underline;
-      cursor: pointer;
-      font-family: inherit;
-    }
-    .card-edit-link:hover { color: var(--text-2); }
-
-    /* ═══ Step 2: Airport ═══ */
-    .airport-step-head { margin-bottom: 20px; }
-    .airport-step-head h2 { font-size: 19px; font-weight: 700; }
-    .airport-step-head p { font-size: 13px; color: var(--text-2); margin-top: 4px; line-height: 1.5; }
-    .airport-step-head strong { color: var(--primary-dk); font-weight: 700; }
-
-    .search-wrap {
+    /* ═══ Card perk banner ═══ */
+    .card-perk-banner {
       display: flex;
-      align-items: center;
-      gap: 12px;
-      background: var(--bg);
-      border: 1.5px solid var(--border);
-      border-radius: 50px;
-      padding: 0 20px;
-      height: 52px;
-      margin-bottom: 24px;
-      transition: border-color 0.15s;
-    }
-    .search-wrap:focus-within { border-color: var(--primary); }
-    .search-wrap svg { width: 18px; height: 18px; color: var(--muted); flex-shrink: 0; }
-    .search-wrap input { flex: 1; border: none; outline: none; font-size: 15px; background: transparent; color: var(--text); font-family: inherit; }
-    .search-wrap input::placeholder { color: var(--muted); }
-
-    .city-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 14px; }
-    .city-card {
-      background: var(--bg);
-      border: 1.5px solid var(--border);
-      border-radius: var(--r-lg);
-      overflow: hidden;
-      cursor: pointer;
-      transition: border-color 0.15s, box-shadow 0.15s, transform 0.15s;
-      box-shadow: var(--shadow-sm);
-    }
-    .city-card:hover { border-color: var(--cream-bd); box-shadow: var(--shadow-md); transform: translateY(-2px); }
-    .city-card.selected { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(155,120,53,0.15); }
-    .city-card-img-wrap { position: relative; height: 130px; overflow: hidden; background: #ddd; }
-    .city-card-img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.4s, opacity 0.3s; opacity: 0; }
-    .city-card-img.loaded { opacity: 1; }
-    .city-card:hover .city-card-img { transform: scale(1.05); }
-    .city-card-img-shimmer {
-      position: absolute; inset: 0;
-      background: linear-gradient(90deg, #e2ddd6 25%, #eee9e1 50%, #e2ddd6 75%);
-      background-size: 200% 100%;
-      animation: shimmer 1.4s infinite;
-      transition: opacity 0.3s;
-    }
-    .city-card-img-shimmer.gone { opacity: 0; pointer-events: none; }
-    .city-card-check {
-      position: absolute; top: 8px; right: 8px;
-      width: 26px; height: 26px;
-      background: var(--primary);
-      border-radius: 50%;
-      display: none;
-      align-items: center; justify-content: center;
-    }
-    .city-card.selected .city-card-check { display: flex; }
-    .city-card-check svg { width: 14px; height: 14px; color: #fff; }
-    .city-card-label { padding: 10px 12px; font-size: 14px; font-weight: 600; color: var(--text); text-align: center; }
-    .city-card.selected .city-card-label { background: var(--cream); color: var(--primary); }
-    .city-card-count { font-size: 11px; font-weight: 500; color: var(--muted); display: block; margin-top: 1px; }
-    .city-card.selected .city-card-count { color: var(--primary); opacity: 0.8; }
-    .city-no-results { grid-column: 1 / -1; text-align: center; padding: 40px; color: var(--muted); font-size: 14px; }
-
-    @keyframes shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
-
-    /* ═══ Step 3: Lounge results ═══ */
-    .lounge-step-head { margin-bottom: 20px; }
-    .back-pill {
-      display: inline-flex;
       align-items: center;
       gap: 10px;
       background: var(--cream);
       border: 1.5px solid var(--cream-bd);
       border-radius: var(--r-md);
-      padding: 10px 16px;
-      cursor: pointer;
-      font-family: inherit;
-      transition: border-color 0.15s, background 0.15s;
+      padding: 12px 18px;
+      margin-bottom: 24px;
+      font-size: 13px;
+      color: var(--text-2);
+      font-weight: 500;
     }
-    .back-pill:hover { background: var(--cream-bd); }
-    .back-pill svg { width: 16px; height: 16px; color: var(--primary); flex-shrink: 0; }
-    .back-pill-name { font-size: 14px; font-weight: 700; color: var(--text); }
-    .back-pill-change { font-size: 11px; font-weight: 700; color: var(--primary); text-transform: uppercase; letter-spacing: 0.5px; margin-left: 2px; }
+    .card-perk-banner strong { color: var(--text); font-weight: 700; }
+    .tier-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--primary); flex-shrink: 0; }
+    .tier-dot.private { background: #17130F; box-shadow: 0 0 0 2px #C9A15E inset; }
 
-    .filter-groups { display: flex; gap: 28px; flex-wrap: wrap; margin-bottom: 24px; }
-    .filter-group { flex: 1; min-width: 180px; }
+    /* ═══ Terminal filter ═══ */
+    .filter-groups { margin-bottom: 24px; }
     .filter-group-label { font-size: 12px; font-weight: 700; color: var(--text-2); text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 10px; }
     .radio-pills { display: flex; flex-wrap: wrap; gap: 8px; }
     .radio-pill {
       display: flex; align-items: center; justify-content: space-between; gap: 10px;
-      padding: 12px 14px;
+      padding: 10px 14px;
       border: 1.5px solid var(--border);
       border-radius: var(--r-sm);
       cursor: pointer;
@@ -343,88 +157,86 @@
     .radio-pill:hover { border-color: var(--cream-bd); background: var(--cream); color: var(--text); }
     .radio-pill.active { border-color: var(--primary); background: var(--cream); color: var(--text); }
     .radio-circle {
-      width: 20px; height: 20px; border: 2px solid var(--border); border-radius: 50%; flex-shrink: 0;
+      width: 18px; height: 18px; border: 2px solid var(--border); border-radius: 50%; flex-shrink: 0;
       display: flex; align-items: center; justify-content: center; transition: border-color 0.15s;
     }
     .radio-pill.active .radio-circle { border-color: var(--primary); }
-    .radio-dot { width: 10px; height: 10px; background: var(--primary); border-radius: 50%; display: none; }
+    .radio-dot { width: 9px; height: 9px; background: var(--primary); border-radius: 50%; display: none; }
     .radio-pill.active .radio-dot { display: block; }
 
-    .results-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; }
+    /* ═══ Results ═══ */
+    .results-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
     .results-title { font-size: 16px; font-weight: 700; }
     .results-count { font-size: 13px; color: var(--muted); }
 
-    .lounge-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; }
+    .lounge-list { display: flex; flex-direction: column; gap: 14px; }
 
-    .lcard {
+    .lrow {
+      display: flex;
+      align-items: center;
+      gap: 18px;
       background: var(--bg);
       border: 1.5px solid var(--border);
       border-radius: var(--r-lg);
-      overflow: hidden;
-      display: flex; flex-direction: column;
+      padding: 14px 18px;
       box-shadow: var(--shadow-sm);
-      transition: box-shadow 0.2s, transform 0.2s;
+      transition: box-shadow 0.2s, border-color 0.2s, transform 0.2s;
     }
-    .lcard:hover { box-shadow: var(--shadow-lg); transform: translateY(-3px); }
-    .lcard-img-wrap { position: relative; height: 185px; overflow: hidden; background: #ddd; }
-    .lcard-img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.4s, opacity 0.3s; opacity: 0; }
-    .lcard-img.loaded { opacity: 1; }
-    .lcard:hover .lcard-img { transform: scale(1.04); }
-    .lcard-img-shimmer {
+    .lrow:hover { box-shadow: var(--shadow-md); border-color: var(--cream-bd); transform: translateY(-1px); }
+    .lrow-img-wrap { position: relative; width: 92px; height: 92px; border-radius: var(--r-md); overflow: hidden; flex-shrink: 0; background: #ddd; }
+    .lrow-img { width: 100%; height: 100%; object-fit: cover; display: block; opacity: 0; transition: opacity 0.3s; }
+    .lrow-img.loaded { opacity: 1; }
+    .lrow-img-shimmer {
       position: absolute; inset: 0;
       background: linear-gradient(90deg, #ddd8d0 25%, #eae5dd 50%, #ddd8d0 75%);
       background-size: 200% 100%;
       animation: shimmer 1.4s infinite;
       transition: opacity 0.3s;
     }
-    .lcard-img-shimmer.gone { opacity: 0; pointer-events: none; }
-    .lcard-badge {
-      position: absolute; top: 12px; left: 12px;
-      background: rgba(0,0,0,0.52);
-      backdrop-filter: blur(6px);
+    .lrow-img-shimmer.gone { opacity: 0; pointer-events: none; }
+    .lrow-badge {
+      position: absolute; bottom: 6px; left: 6px;
+      background: rgba(0,0,0,0.55);
+      backdrop-filter: blur(4px);
       color: #fff;
-      font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.6px;
-      padding: 3px 9px; border-radius: 6px;
+      font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;
+      padding: 2px 7px; border-radius: 5px;
     }
-    .lcard-body { padding: 16px 18px 14px; display: flex; flex-direction: column; gap: 12px; flex: 1; }
-    .lcard-name { font-size: 17px; font-weight: 800; color: var(--text); line-height: 1.25; }
-    .lcard-loc { font-size: 12px; color: var(--text-2); margin-top: 3px; line-height: 1.4; }
-    .lcard-amenities { display: flex; gap: 14px; flex-wrap: wrap; }
-    .amenity { display: flex; flex-direction: column; align-items: center; gap: 4px; min-width: 48px; }
-    .amenity-icon { width: 32px; height: 32px; color: var(--primary); }
-    .amenity-icon svg { width: 100%; height: 100%; }
-    .amenity-label { font-size: 10px; font-weight: 600; color: var(--text-2); text-align: center; line-height: 1.2; }
-    .lcard-info { display: flex; flex-direction: column; gap: 7px; }
-    .lcard-info-row { background: var(--cream); border-radius: var(--r-sm); padding: 9px 12px; font-size: 12px; color: var(--text-2); font-weight: 500; text-align: center; }
-    .lcard-cta {
+    .lrow-body { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 4px; }
+    .lrow-name { font-size: 16px; font-weight: 800; color: var(--text); line-height: 1.25; }
+    .lrow-loc { font-size: 12px; color: var(--text-2); line-height: 1.4; }
+    .lrow-amenities { display: flex; gap: 10px; margin-top: 4px; flex-wrap: wrap; }
+    .lrow-amenity { width: 20px; height: 20px; color: var(--primary); flex-shrink: 0; }
+    .lrow-amenity svg { width: 100%; height: 100%; }
+    .lrow-cta {
+      flex-shrink: 0;
       display: flex; align-items: center; justify-content: center; gap: 8px;
       background: var(--primary); color: #fff;
-      padding: 12px 18px; border-radius: var(--r-sm);
+      padding: 12px 26px; border-radius: var(--r-sm);
       font-size: 13px; font-weight: 700; text-decoration: none;
-      transition: background 0.15s; margin-top: auto;
+      transition: background 0.15s;
     }
-    .lcard-cta:hover { background: var(--primary-dk); }
-    .lcard-cta svg { width: 14px; height: 14px; }
+    .lrow-cta:hover { background: var(--primary-dk); }
+    .lrow-cta svg { width: 14px; height: 14px; }
 
-    .empty-state { grid-column: 1 / -1; text-align: center; padding: 80px 32px; color: var(--muted); }
+    @keyframes shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+
+    .empty-state { text-align: center; padding: 80px 32px; color: var(--muted); }
     .empty-state svg { width: 48px; height: 48px; margin-bottom: 12px; opacity: 0.35; }
     .empty-state h3 { font-size: 16px; font-weight: 600; margin-bottom: 6px; color: var(--text-2); }
     .empty-state p { font-size: 13px; }
 
     /* ═══ Responsive ═══ */
     @media (max-width: 900px) {
-      header, .wizard-body, .stepper { padding-left: 24px; padding-right: 24px; }
-      .city-grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); }
+      header, .main-body { padding-left: 24px; padding-right: 24px; }
     }
     @media (max-width: 600px) {
       body { padding: 10px 8px 32px; }
-      header, .wizard-body { padding-left: 16px; padding-right: 16px; }
-      .stepper { padding: 14px 16px; gap: 6px; }
-      .step-line { width: 20px; }
-      .step-label { display: none; }
-      .step-item.active .step-label { display: block; font-size: 11px; }
-      .filter-groups { flex-direction: column; gap: 16px; }
-      .lounge-grid { grid-template-columns: 1fr; }
+      header, .main-body { padding-left: 16px; padding-right: 16px; }
+      .selector-bar { flex-direction: column; gap: 14px; }
+      .lrow { flex-wrap: wrap; }
+      .lrow-body { min-width: 160px; }
+      .lrow-cta { width: 100%; }
     }
   </style>
 </head>
@@ -440,112 +252,62 @@
     </div>
   </header>
 
-  <!-- ═══ Stepper ═══ -->
-  <nav class="stepper" id="stepper">
-    <div class="step-item" data-step="1">
-      <span class="step-dot">1</span>
-      <span class="step-label">Card</span>
-    </div>
-    <span class="step-line" id="stepLine1"></span>
-    <div class="step-item" data-step="2">
-      <span class="step-dot">2</span>
-      <span class="step-label">Airport</span>
-    </div>
-    <span class="step-line" id="stepLine2"></span>
-    <div class="step-item" data-step="3">
-      <span class="step-dot">3</span>
-      <span class="step-label">Lounge</span>
-    </div>
-  </nav>
+  <div class="main-body">
 
-  <div class="wizard-body">
-
-    <!-- ═══ Step 1: Card ═══ -->
-    <section class="step-panel active" id="panelCard">
-      <div class="card-gate-box">
-        <div class="card-gate-icon" id="cardGateIcon">
-          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>
+    <!-- ═══ Selector bar ═══ -->
+    <section class="selector-bar">
+      <div class="selector-field">
+        <label class="selector-label" for="cardTypeSelect">Card Type</label>
+        <div class="select-wrap">
+          <select id="cardTypeSelect">
+            <option value="" disabled selected>Select card type</option>
+            <option value="credit">Credit Card</option>
+            <option value="debit">Debit Card</option>
+          </select>
+          <svg class="select-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
         </div>
+      </div>
 
-        <div id="cardFormBlock">
-          <h2>Find Your Lounge Access</h2>
-          <p>Select your card type and card name to check your lounge eligibility.</p>
-
-          <div class="card-select-group">
-            <label class="card-select-label" for="cardTypeSelect">Card Type</label>
-            <div class="card-select-wrap">
-              <select id="cardTypeSelect" autofocus>
-                <option value="" disabled selected>Select card type</option>
-                <option value="credit">Credit Card</option>
-                <option value="debit">Debit Card</option>
-              </select>
-              <svg class="card-select-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
-            </div>
-          </div>
-
-          <div class="card-select-group">
-            <label class="card-select-label" for="cardNameSelect">Card Name</label>
-            <div class="card-select-wrap">
-              <select id="cardNameSelect" disabled>
-                <option value="" disabled selected>Select card type first</option>
-              </select>
-              <svg class="card-select-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
-            </div>
-          </div>
-
-          <div class="card-gate-error" id="cardGateError"></div>
-          <button class="card-gate-btn" id="cardGateBtn" disabled>Continue</button>
+      <div class="selector-field">
+        <label class="selector-label" for="cardNameSelect">Card Name</label>
+        <div class="select-wrap">
+          <select id="cardNameSelect" disabled>
+            <option value="" disabled selected>Select card type first</option>
+          </select>
+          <svg class="select-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
         </div>
+      </div>
 
-        <div id="cardConfirmBlock" class="card-confirm-block" style="display:none;">
-          <div class="tier-chip" id="tierChip">
-            <span class="tier-chip-eyebrow" id="tierChipEyebrow"></span>
-            <span class="tier-chip-name" id="tierChipName"></span>
-          </div>
-          <p class="card-perk" id="cardPerk"></p>
-          <button class="card-gate-btn" id="cardContinueBtn">Continue to Airports</button>
-          <button class="card-edit-link" id="cardEditLink">Not your card? Re-enter</button>
+      <div class="selector-field">
+        <label class="selector-label" for="citySelect">Airport / City</label>
+        <div class="select-wrap">
+          <select id="citySelect" disabled>
+            <option value="" disabled selected>Select your card first</option>
+          </select>
+          <svg class="select-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
         </div>
       </div>
     </section>
 
-    <!-- ═══ Step 2: Airport ═══ -->
-    <section class="step-panel" id="panelAirport">
-      <div class="airport-step-head">
-        <h2>Choose your airport</h2>
-        <p>Lounges available with your <strong id="airportStepCard">card</strong></p>
-      </div>
-      <div class="search-wrap">
-        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-4.35-4.35M17 11A6 6 0 115 11a6 6 0 0112 0z"/>
-        </svg>
-        <input id="citySearch" type="text" placeholder="Where are you traveling to?" autocomplete="off" spellcheck="false" />
-      </div>
-      <div class="city-grid" id="cityGrid"></div>
+    <!-- ═══ Card perk banner ═══ -->
+    <div class="card-perk-banner" id="cardPerkBanner" style="display:none;">
+      <span class="tier-dot" id="tierDot"></span>
+      <span id="cardPerkText"></span>
+    </div>
+
+    <!-- ═══ Terminal filter ═══ -->
+    <section class="filter-groups" id="terminalGroup" style="display:none;">
+      <div class="filter-group-label">Terminal</div>
+      <div class="radio-pills" id="terminalPills"></div>
     </section>
 
-    <!-- ═══ Step 3: Lounge results ═══ -->
-    <section class="step-panel" id="panelLounge">
-      <div class="lounge-step-head">
-        <button class="back-pill" id="backToAirport" title="Change airport">
-          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"/></svg>
-          <span class="back-pill-name" id="loungeAirportName"></span>
-          <span class="back-pill-change">Change</span>
-        </button>
-      </div>
-
-      <div class="filter-groups">
-        <div class="filter-group" id="terminalGroup">
-          <div class="filter-group-label">Terminal</div>
-          <div class="radio-pills" id="terminalPills"></div>
-        </div>
-      </div>
-
+    <!-- ═══ Results ═══ -->
+    <section>
       <div class="results-header">
-        <span class="results-title" id="resultsTitle"></span>
+        <span class="results-title" id="resultsTitle">Select your card and airport</span>
         <span class="results-count" id="resultsCount"></span>
       </div>
-      <div class="lounge-grid" id="loungeGrid"></div>
+      <div class="lounge-list" id="loungeList"></div>
     </section>
 
   </div>
@@ -631,47 +393,19 @@ const lounges = [
 ];
 
 /* ══════════════════════════════════════
-   IMAGE POOLS
+   LOUNGE THUMBNAIL IMAGES
 ══════════════════════════════════════ */
-const CITY_IMAGES = {
-  Ahmedabad:   'https://images.unsplash.com/photo-1625905171675-3d4b5c73f9c3?auto=format&fit=crop&w=400&h=260&q=75',
-  Ayodhya:     'https://images.unsplash.com/photo-1691152993009-e92a51f83f64?auto=format&fit=crop&w=400&h=260&q=75',
-  Bagdogra:    'https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=400&h=260&q=75',
-  Bengaluru:   'https://images.unsplash.com/photo-1596768539879-3da14c2fe54e?auto=format&fit=crop&w=400&h=260&q=75',
-  Bhopal:      'https://images.unsplash.com/photo-1567157577867-05ccb1388e66?auto=format&fit=crop&w=400&h=260&q=75',
-  Bhubaneswar: 'https://images.unsplash.com/photo-1583407723467-64d96d3b6a85?auto=format&fit=crop&w=400&h=260&q=75',
-  Calicut:     'https://images.unsplash.com/photo-1602158658154-7eb5e7b65e4d?auto=format&fit=crop&w=400&h=260&q=75',
-  Chennai:     'https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&w=400&h=260&q=75',
-  Dehradun:    'https://images.unsplash.com/photo-1600001949630-a6db1b543e66?auto=format&fit=crop&w=400&h=260&q=75',
-  Delhi:       'https://images.unsplash.com/photo-1587474260584-136574528ed5?auto=format&fit=crop&w=400&h=260&q=75',
-  Durgapur:    'https://images.unsplash.com/photo-1595435742656-5272d0b3fa82?auto=format&fit=crop&w=400&h=260&q=75',
-  Goa:         'https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?auto=format&fit=crop&w=400&h=260&q=75',
-  Hyderabad:   'https://images.unsplash.com/photo-1572445271230-a78b5944a659?auto=format&fit=crop&w=400&h=260&q=75',
-  Indore:      'https://images.unsplash.com/photo-1631290026756-6bdc3c9c8f41?auto=format&fit=crop&w=400&h=260&q=75',
-  Kannur:      'https://images.unsplash.com/photo-1593693397690-362cb9666fc2?auto=format&fit=crop&w=400&h=260&q=75',
-  Kochi:       'https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?auto=format&fit=crop&w=400&h=260&q=75',
-  Kolkata:     'https://images.unsplash.com/photo-1558431382-27e303142255?auto=format&fit=crop&w=400&h=260&q=75',
-  Mumbai:      'https://images.unsplash.com/photo-1529253355930-ddbe423a2ac7?auto=format&fit=crop&w=400&h=260&q=75',
-  Nagpur:      'https://images.unsplash.com/photo-1605649461784-e6aad8571c55?auto=format&fit=crop&w=400&h=260&q=75',
-  Noida:       'https://images.unsplash.com/photo-1613843439331-2e8b28c6c7e1?auto=format&fit=crop&w=400&h=260&q=75',
-  Patna:       'https://images.unsplash.com/photo-1621265469059-2b7cd42b0e6e?auto=format&fit=crop&w=400&h=260&q=75',
-  Prayagraj:   'https://images.unsplash.com/photo-1626015365107-851bbde78b87?auto=format&fit=crop&w=400&h=260&q=75',
-  Trichy:      'https://images.unsplash.com/photo-1617882716878-5dc7d8c3db57?auto=format&fit=crop&w=400&h=260&q=75',
-  Vadodara:    'https://images.unsplash.com/photo-1524492412937-b28074a5d7da?auto=format&fit=crop&w=400&h=260&q=75',
-  Varanasi:    'https://images.unsplash.com/photo-1561361058-c28e2c5a5b8f?auto=format&fit=crop&w=400&h=260&q=75',
-};
-
 const LOUNGE_IMGS = [
-  'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=480&h=220&q=75',
-  'https://images.unsplash.com/photo-1551882547-ff40c599fb74?auto=format&fit=crop&w=480&h=220&q=75',
-  'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=480&h=220&q=75',
-  'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=480&h=220&q=75',
-  'https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&w=480&h=220&q=75',
-  'https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=480&h=220&q=75',
-  'https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=480&h=220&q=75',
-  'https://images.unsplash.com/photo-1582719508461-905c673771fd?auto=format&fit=crop&w=480&h=220&q=75',
-  'https://images.unsplash.com/photo-1540541338537-ad15a2fad6f0?auto=format&fit=crop&w=480&h=220&q=75',
-  'https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=480&h=220&q=75',
+  'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=200&h=200&q=75',
+  'https://images.unsplash.com/photo-1551882547-ff40c599fb74?auto=format&fit=crop&w=200&h=200&q=75',
+  'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=200&h=200&q=75',
+  'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=200&h=200&q=75',
+  'https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&w=200&h=200&q=75',
+  'https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=200&h=200&q=75',
+  'https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=200&h=200&q=75',
+  'https://images.unsplash.com/photo-1582719508461-905c673771fd?auto=format&fit=crop&w=200&h=200&q=75',
+  'https://images.unsplash.com/photo-1540541338537-ad15a2fad6f0?auto=format&fit=crop&w=200&h=200&q=75',
+  'https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=200&h=200&q=75',
 ];
 
 /* ══════════════════════════════════════
@@ -691,10 +425,6 @@ function h32(str) {
   for (let i = 0; i < str.length; i++) h = (h * 31 + str.charCodeAt(i)) >>> 0;
   return h;
 }
-function getAmenities() { return AMENITIES; }
-
-const CHECK_SVG = '<svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>';
-const CARD_ICON_SVG = '<svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>';
 
 /* ══════════════════════════════════════
    CARD CATALOG
@@ -717,224 +447,97 @@ function findCard(type, id) {
 /* ══════════════════════════════════════
    STATE
 ══════════════════════════════════════ */
+let selCard     = null;
+let selCity     = null;
+let selTerminal = 'all';
+
 function eligibleLounges() {
   if (!selCard) return [];
   return selCard.tier === 'private' ? lounges : lounges.filter(l => l.type === 'domestic');
 }
 
-function computeCityData() {
-  const el = eligibleLounges();
-  const cityList = [...new Set(el.map(l => l.city))].sort();
-  const counts = Object.fromEntries(cityList.map(c => [c, el.filter(l => l.city === c).length]));
-  return { cityList, counts };
+function eligibleCities() {
+  return [...new Set(eligibleLounges().map(l => l.city))].sort();
 }
-
-let cities      = [];
-let cityCounts  = {};
-let selCard     = null;
-let selCity     = null;
-let selTerminal = 'all';
-let currentStep = 1;
 
 /* ══════════════════════════════════════
-   STEPPER / NAVIGATION
+   ELEMENT REFS
 ══════════════════════════════════════ */
-function goToStep(n) {
-  currentStep = n;
-  ['panelCard','panelAirport','panelLounge'].forEach((id, i) => {
-    document.getElementById(id).classList.toggle('active', i === n - 1);
-  });
-  renderStepper();
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-  if (n === 1) setTimeout(() => cardTypeSelect.focus(), 300);
-}
-
-function renderStepper() {
-  const doneMap = { 1: !!selCard, 2: !!selCity, 3: false };
-  [1, 2, 3].forEach(n => {
-    const el = document.querySelector(`.step-item[data-step="${n}"]`);
-    const dot = el.querySelector('.step-dot');
-    el.classList.remove('active', 'done', 'upcoming');
-    if (n === currentStep) {
-      el.classList.add('active');
-      dot.innerHTML = n;
-    } else if (doneMap[n]) {
-      el.classList.add('done');
-      dot.innerHTML = CHECK_SVG;
-    } else {
-      el.classList.add('upcoming');
-      dot.innerHTML = n;
-    }
-  });
-  document.getElementById('stepLine1').classList.toggle('done', !!selCard);
-  document.getElementById('stepLine2').classList.toggle('done', !!selCity);
-}
-
-document.querySelectorAll('.step-item').forEach(el => {
-  el.addEventListener('click', () => {
-    if (!el.classList.contains('done')) return;
-    const n = Number(el.dataset.step);
-    if (n === 1) { resetCard(); return; }
-    if (n === 2) { goToStep(2); return; }
-  });
-});
-
-document.getElementById('backToAirport').addEventListener('click', () => goToStep(2));
+const cardTypeSelect  = document.getElementById('cardTypeSelect');
+const cardNameSelect  = document.getElementById('cardNameSelect');
+const citySelect      = document.getElementById('citySelect');
+const cardPerkBanner  = document.getElementById('cardPerkBanner');
+const cardPerkText    = document.getElementById('cardPerkText');
+const tierDot         = document.getElementById('tierDot');
+const terminalGroup   = document.getElementById('terminalGroup');
+const terminalPills   = document.getElementById('terminalPills');
+const resultsTitle    = document.getElementById('resultsTitle');
+const resultsCount    = document.getElementById('resultsCount');
+const loungeList      = document.getElementById('loungeList');
 
 /* ══════════════════════════════════════
-   STEP 1 — CARD
+   CARD TYPE / NAME
 ══════════════════════════════════════ */
-const cardTypeSelect   = document.getElementById('cardTypeSelect');
-const cardNameSelect   = document.getElementById('cardNameSelect');
-const cardGateBtn      = document.getElementById('cardGateBtn');
-const cardGateError    = document.getElementById('cardGateError');
-const cardGateIcon     = document.getElementById('cardGateIcon');
-const cardFormBlock    = document.getElementById('cardFormBlock');
-const cardConfirmBlock = document.getElementById('cardConfirmBlock');
-
-function updateCardGateBtn() {
-  cardGateBtn.disabled = !(cardTypeSelect.value && cardNameSelect.value);
-}
-
 cardTypeSelect.addEventListener('change', () => {
   const type = cardTypeSelect.value;
   const cards = CARD_CATALOG[type] || [];
   cardNameSelect.innerHTML = '<option value="" disabled selected>Select card name</option>' +
     cards.map(c => `<option value="${c.id}">${c.name}</option>`).join('');
   cardNameSelect.disabled = !type;
-  cardGateError.textContent = '';
-  updateCardGateBtn();
+  clearCardSelection();
 });
 
 cardNameSelect.addEventListener('change', () => {
-  cardGateError.textContent = '';
-  updateCardGateBtn();
-});
-
-cardGateBtn.addEventListener('click', () => {
   const match = findCard(cardTypeSelect.value, cardNameSelect.value);
-  if (!match) {
-    cardGateError.textContent = 'Please select your card type and card name.';
-    return;
-  }
   selCard = match;
-  showCardConfirmation(match);
+  selCity = null;
+  selTerminal = 'all';
+
+  if (match) {
+    cardPerkBanner.style.display = 'flex';
+    tierDot.className = 'tier-dot' + (match.tier === 'private' ? ' private' : '');
+    cardPerkText.innerHTML = `<strong>${match.name}:</strong> ${match.perk}`;
+
+    const cities = eligibleCities();
+    citySelect.innerHTML = '<option value="" disabled selected>Select an airport</option>' +
+      cities.map(c => `<option value="${c}">${c}</option>`).join('');
+    citySelect.disabled = false;
+  } else {
+    clearCardSelection();
+  }
+  renderTerminalFilter();
+  renderResults();
 });
 
-function showCardConfirmation(match) {
-  cardFormBlock.style.display = 'none';
-  cardConfirmBlock.style.display = 'block';
-  const chip = document.getElementById('tierChip');
-  chip.className = 'tier-chip tier-' + match.tier;
-  document.getElementById('tierChipEyebrow').textContent = match.tier === 'private' ? 'Private Tier' : 'Select Tier';
-  document.getElementById('tierChipName').textContent = match.name;
-  document.getElementById('cardPerk').textContent = match.perk;
-  document.getElementById('airportStepCard').textContent = match.name;
-  cardGateIcon.classList.add('confirmed');
-  cardGateIcon.innerHTML = CHECK_SVG;
-
-  const { cityList, counts } = computeCityData();
-  cities = cityList;
-  cityCounts = counts;
-  document.getElementById('citySearch').value = '';
-  renderCityGrid();
-  renderStepper();
-}
-
-function resetCard() {
+function clearCardSelection() {
   selCard = null;
   selCity = null;
   selTerminal = 'all';
-  cities = [];
-  cityCounts = {};
-  cardTypeSelect.value = '';
-  cardNameSelect.innerHTML = '<option value="" disabled selected>Select card type first</option>';
-  cardNameSelect.disabled = true;
-  document.getElementById('citySearch').value = '';
-  cardGateBtn.disabled = true;
-  cardGateError.textContent = '';
-  cardFormBlock.style.display = '';
-  cardConfirmBlock.style.display = 'none';
-  cardGateIcon.classList.remove('confirmed');
-  cardGateIcon.innerHTML = CARD_ICON_SVG;
-  goToStep(1);
+  cardPerkBanner.style.display = 'none';
+  citySelect.innerHTML = '<option value="" disabled selected>Select your card first</option>';
+  citySelect.disabled = true;
+  renderTerminalFilter();
+  renderResults();
 }
-
-document.getElementById('cardContinueBtn').addEventListener('click', () => goToStep(2));
-document.getElementById('cardEditLink').addEventListener('click', resetCard);
 
 /* ══════════════════════════════════════
-   STEP 2 — AIRPORT / CITY GRID
+   AIRPORT / CITY
 ══════════════════════════════════════ */
-function renderCityGrid(query = '') {
-  const q = query.toLowerCase().trim();
-  const filtered = cities.filter(c => c.toLowerCase().includes(q));
-  const grid = document.getElementById('cityGrid');
-
-  if (!filtered.length) {
-    grid.innerHTML = `<div class="city-no-results">No airports match "<strong>${query}</strong>"</div>`;
-    return;
-  }
-
-  grid.innerHTML = filtered.map(city => {
-    const imgUrl = CITY_IMAGES[city] || 'https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=400&h=260&q=75';
-    const shId = 'csh-' + h32(city);
-    const isSelected = city === selCity;
-    return `
-    <div class="city-card ${isSelected ? 'selected' : ''}" data-city="${city}">
-      <div class="city-card-img-wrap">
-        <div class="city-card-img-shimmer" id="${shId}"></div>
-        <img class="city-card-img" src="${imgUrl}" alt="${city}"
-          onload="this.classList.add('loaded');document.getElementById('${shId}').classList.add('gone')"
-          onerror="document.getElementById('${shId}').classList.add('gone')" />
-        <div class="city-card-check">
-          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
-        </div>
-      </div>
-      <div class="city-card-label">
-        ${city}
-        <span class="city-card-count">${cityCounts[city]} lounge${cityCounts[city] > 1 ? 's' : ''}</span>
-      </div>
-    </div>`;
-  }).join('');
-}
-
-document.getElementById('cityGrid').addEventListener('click', e => {
-  const card = e.target.closest('.city-card');
-  if (!card) return;
-  const city = card.dataset.city;
-  selCity = city;
+citySelect.addEventListener('change', () => {
+  selCity = citySelect.value || null;
   selTerminal = 'all';
-  renderCityGrid(document.getElementById('citySearch').value);
-  renderLoungeStepHead();
-  renderFilterStrip();
-  applyFilters();
-  goToStep(3);
+  renderTerminalFilter();
+  renderResults();
 });
 
-document.getElementById('citySearch').addEventListener('input', e => {
-  renderCityGrid(e.target.value);
-});
-
-/* ══════════════════════════════════════
-   STEP 3 — LOUNGE RESULTS
-══════════════════════════════════════ */
-function renderLoungeStepHead() {
-  if (!selCity) return;
-  const cityLounges = eligibleLounges().filter(l => l.city === selCity);
-  document.getElementById('loungeAirportName').textContent = cityLounges[0].airport;
-}
-
-function renderFilterStrip() {
-  if (!selCity) return;
+function renderTerminalFilter() {
+  if (!selCard || !selCity) { terminalGroup.style.display = 'none'; return; }
   const cityLounges = eligibleLounges().filter(l => l.city === selCity);
   const terminals = [...new Set(cityLounges.map(l => l.terminal))].sort();
 
-  const tGroup = document.getElementById('terminalGroup');
-  const tPills = document.getElementById('terminalPills');
   if (terminals.length > 1) {
-    tGroup.style.display = '';
-    tPills.innerHTML = [
+    terminalGroup.style.display = '';
+    terminalPills.innerHTML = [
       { val:'all', label:'All Terminals' },
       ...terminals.map(t => ({ val: t, label: 'Terminal ' + t.replace('T','') }))
     ].map(o => `
@@ -943,71 +546,78 @@ function renderFilterStrip() {
         <span class="radio-circle"><span class="radio-dot"></span></span>
       </label>`).join('');
   } else {
-    tGroup.style.display = 'none';
+    terminalGroup.style.display = 'none';
   }
 }
 
-document.getElementById('terminalPills').addEventListener('click', e => {
+terminalPills.addEventListener('click', e => {
   const pill = e.target.closest('.radio-pill');
   if (!pill) return;
   selTerminal = pill.dataset.val;
-  renderFilterStrip();
-  applyFilters();
+  renderTerminalFilter();
+  renderResults();
 });
 
-function renderLounge(l) {
+/* ══════════════════════════════════════
+   RESULTS — LOUNGE LIST
+══════════════════════════════════════ */
+function renderLoungeRow(l) {
   const key = l.city + l.name;
   const imgUrl = LOUNGE_IMGS[h32(key) % LOUNGE_IMGS.length];
   const shId = 'lsh-' + h32(key);
-  const amenities = getAmenities();
   const gateLabel = l.gate === 'both' ? 'Dep & Arrival' : l.gate.charAt(0).toUpperCase() + l.gate.slice(1);
-  const locLine = `${gateLabel} · ${l.terminal} · ${l.location.charAt(0).toUpperCase() + l.location.slice(1)}`;
+  const locLine = `${l.airport} · ${gateLabel} · ${l.terminal} · ${l.location.charAt(0).toUpperCase() + l.location.slice(1)}`;
 
   return `
-  <div class="lcard">
-    <div class="lcard-img-wrap">
-      <div class="lcard-img-shimmer" id="${shId}"></div>
-      <img class="lcard-img" src="${imgUrl}" alt="${l.name}"
+  <div class="lrow">
+    <div class="lrow-img-wrap">
+      <div class="lrow-img-shimmer" id="${shId}"></div>
+      <img class="lrow-img" src="${imgUrl}" alt="${l.name}"
         onload="this.classList.add('loaded');document.getElementById('${shId}').classList.add('gone')"
         onerror="document.getElementById('${shId}').classList.add('gone')" />
-      <span class="lcard-badge">${l.type === 'domestic' ? 'Domestic' : 'International'}</span>
+      <span class="lrow-badge">${l.type === 'domestic' ? 'Domestic' : 'International'}</span>
     </div>
-    <div class="lcard-body">
-      <div>
-        <div class="lcard-name">${l.name}</div>
-        <div class="lcard-loc">${l.airport} · ${locLine}</div>
+    <div class="lrow-body">
+      <div class="lrow-name">${l.name}</div>
+      <div class="lrow-loc">${locLine}</div>
+      <div class="lrow-amenities">
+        ${AMENITIES.map(a => `<span class="lrow-amenity" title="${a.label}">${a.svg}</span>`).join('')}
       </div>
-      <div class="lcard-amenities">
-        ${amenities.map(a => `
-        <div class="amenity">
-          <div class="amenity-icon">${a.svg}</div>
-          <span class="amenity-label">${a.label}</span>
-        </div>`).join('')}
-      </div>
-      <div class="lcard-info">
-        <div class="lcard-info-row">Includes up to 2 hours of lounge access</div>
-      </div>
-      <a href="${l.url}" target="_blank" rel="noopener" class="lcard-cta">
-        Access Lounge
-        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-      </a>
     </div>
+    <a href="${l.url}" target="_blank" rel="noopener" class="lrow-cta">
+      Book
+      <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+    </a>
   </div>`;
 }
 
-function applyFilters() {
-  const grid = document.getElementById('loungeGrid');
-  if (!selCity) { grid.innerHTML = ''; return; }
+function renderResults() {
+  if (!selCard) {
+    resultsTitle.textContent = 'Select your card and airport';
+    resultsCount.textContent = '';
+    loungeList.innerHTML = '';
+    return;
+  }
+  if (!selCity) {
+    resultsTitle.textContent = 'Select an airport';
+    resultsCount.textContent = '';
+    loungeList.innerHTML = `<div class="empty-state">
+      <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 21c-4-4-7-7.5-7-11.5A7 7 0 0119 9.5C19 13.5 16 17 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>
+      <h3>Choose an airport</h3>
+      <p>Pick an airport above to see lounges available with your card.</p>
+    </div>`;
+    return;
+  }
 
   let result = eligibleLounges().filter(l => l.city === selCity);
   if (selTerminal !== 'all') result = result.filter(l => l.terminal === selTerminal);
 
   const n = result.length;
-  document.getElementById('resultsCount').textContent = `${n} lounge${n !== 1 ? 's' : ''} found`;
-  document.getElementById('resultsTitle').textContent = `Lounges in ${selCity}`;
+  resultsTitle.textContent = `Lounges in ${selCity}`;
+  resultsCount.textContent = `${n} lounge${n !== 1 ? 's' : ''} found`;
 
   if (!n) {
-    grid.innerHTML = `<div class="empty-state">
+    loungeList.innerHTML = `<div class="empty-state">
       <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
       <h3>No lounges found</h3>
       <p>Try adjusting your filters or selecting a different terminal.</p>
@@ -1015,13 +625,13 @@ function applyFilters() {
     return;
   }
 
-  grid.innerHTML = result.map(renderLounge).join('');
+  loungeList.innerHTML = result.map(renderLoungeRow).join('');
 }
 
 /* ══════════════════════════════════════
    INIT
 ══════════════════════════════════════ */
-renderStepper();
+renderResults();
 </script>
 </body>
 </html>
